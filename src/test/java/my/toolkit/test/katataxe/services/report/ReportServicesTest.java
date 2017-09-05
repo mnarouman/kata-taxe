@@ -49,6 +49,7 @@ public class ReportServicesTest {
 		// then
 		assertThat(actual).isEqualTo(expected);
 	}
+
 	@Test
 	public void afficheTotalFormatFor1() {
 		// given
@@ -64,5 +65,4 @@ public class ReportServicesTest {
 		// then
 		assertThat(actual).isEqualTo(expected);
 	}
-
 }
