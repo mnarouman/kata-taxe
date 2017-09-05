@@ -25,7 +25,7 @@ public class ReportServicesTest {
 	public void afficheTotal() {
 		// given
 		String expected = "Montant des taxes : 0.00" + sep +
-				"Total : 00.00";
+				"Total : 0.00";
 
 		// when
 		String actual = reportServices.report(0 , 0);
@@ -38,7 +38,7 @@ public class ReportServicesTest {
 	public void afficheTotalFormatFor0() {
 		// given
 		String expected = "Montant des taxes : 0.00" + sep +
-				"Total : 00.00";
+				"Total : 0.00";
 		double taxes = 0;
 		double total = 0;
 		
