@@ -2,6 +2,9 @@ package my.toolkit.test.katataxe.services.report;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -84,6 +87,28 @@ public class ReportServicesTest {
 
 		// when
 		String actual = reportServices.report(product);
+
+		// then
+		assertThat(actual).isEqualTo(expected);
+	}
+	@Test
+	public void afficheTotalFor2Products() {
+		// given
+		String sProducts = 	"1 CD musical : 16.49" + sep+
+							"1 flacon de parfum importé : 54.65";
+		String expected = sProducts + sep +
+				"Montant des taxes : 0.00" + sep +
+				"Total : 16.49";
+		// and
+		Product product1 = Product.builder().withName("1 CD musical").withPrixHT(16.49d).withTaxe(0).build();
+		Product product2 = Product.builder().withName("1 flacon de parfum importé").withPrixHT(54.65d).withTaxe(0).build();
+		
+		List<Product>products = new ArrayList<>();
+		products.add(product1);
+		products.add(product2);
+
+		// when
+		String actual = reportServices.report(products);
 
 		// then
 		assertThat(actual).isEqualTo(expected);
