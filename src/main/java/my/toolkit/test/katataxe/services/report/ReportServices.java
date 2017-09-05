@@ -2,6 +2,7 @@ package my.toolkit.test.katataxe.services.report;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Locale;
 
 import my.toolkit.test.katataxe.domain.product.Product;
@@ -28,16 +29,26 @@ public class ReportServices {
 		return doubleFormated;
 	}
 
-	public String report(Product product) {
-		double total = product.getPrixHT();
-		String sTotal = format(total);
-		double taxes = product.getTaxe();
-		String sTaxe = format(taxes);
-		String products = product.getName().concat(" : ").concat(sTotal).concat(sep);
+	public String report(List<Product> products2) {
+		StringBuffer report = new StringBuffer();
+		double totalHT = 0;
+		double totalTaxe = 0;
 		
-		String report = products
-				.concat("Montant des taxes : ").concat(sTaxe).concat(sep)
-				.concat("Total : ").concat(sTotal);
-		return report;
+		for (Product product : products2) {
+			
+			double prixHT = product.getPrixHT();
+			totalHT += prixHT;
+			String sPrixHT = format(prixHT);
+			
+			double productTaxe = product.getTaxe();
+			totalTaxe += productTaxe;
+
+			String sProduct = product.getName().concat(" : ").concat(sPrixHT).concat(sep);
+			report.append(sProduct);
+		}
+		
+		report.append("Montant des taxes : ").append(format(totalTaxe)).append(sep)
+				.append("Total : ").append(format(totalHT));
+		return report.toString();
 	}
 }
