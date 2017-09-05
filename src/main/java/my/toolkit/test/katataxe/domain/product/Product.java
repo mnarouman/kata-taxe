@@ -6,8 +6,8 @@ import com.google.common.base.MoreObjects;
 import com.google.common.collect.ComparisonChain;
 
 public class Product implements Comparable<Product> {
-	private String name="";
 
+	private String name = "";
 	private double prixHT;
 	private double taxe;
 
@@ -21,28 +21,13 @@ public class Product implements Comparable<Product> {
 	public String getName() {
 		return name;
 	}
-	
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
+
 	public double getPrixHT() {
 		return prixHT;
 	}
 
-	public void setPrixHT(double prixHT) {
-		this.prixHT = prixHT;
-	}
-
-
 	public double getTaxe() {
 		return taxe;
-	}
-
-
-	public void setTaxe(double taxe) {
-		this.taxe = taxe;
 	}
 
 	@Override
@@ -71,6 +56,7 @@ public class Product implements Comparable<Product> {
 
 	/**
 	 * Creates builder to build {@link Product}.
+	 * 
 	 * @return created builder
 	 */
 	@Generated("SparkTools")
@@ -83,7 +69,7 @@ public class Product implements Comparable<Product> {
 	 */
 	@Generated("SparkTools")
 	public static final class Builder {
-		private String name="";
+		private String name = "";
 		private double prixHT;
 		private double taxe;
 
@@ -109,6 +95,5 @@ public class Product implements Comparable<Product> {
 			return new Product(this);
 		}
 	}
-
 
 }

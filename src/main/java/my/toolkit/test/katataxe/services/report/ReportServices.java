@@ -5,7 +5,10 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
+import my.toolkit.test.katataxe.domain.command.Command;
+import my.toolkit.test.katataxe.domain.facture.Facture;
 import my.toolkit.test.katataxe.domain.product.Product;
+import my.toolkit.test.katataxe.services.command.CommandServices;
 
 public class ReportServices {
 	private String sep = System.getProperty("line.separator");
@@ -14,6 +17,8 @@ public class ReportServices {
 	private Locale locale = new Locale("en", "UK");
 	private String pattern = "0.00";
 	private DecimalFormat f = (DecimalFormat) NumberFormat.getNumberInstance(locale);
+
+	private CommandServices commandServices = CommandServices.getUniqueInstance();
 
 	private ReportServices() {
 		super();
@@ -29,24 +34,24 @@ public class ReportServices {
 		return doubleFormated;
 	}
 
-	public String report(List<Product> products2) {
+	public String report(Command command) {
+
+		Facture facture = commandServices.createFacture(command);
+
+		List<Product> products = facture.getProducts();
+
 		StringBuffer report = new StringBuffer();
-		double totalHT = 0;
-		double totalTaxe = 0;
-		
-		for (Product product : products2) {
-			
+		double totalHT = facture.getPrixHT();
+
+		for (Product product : products) {
 			double prixHT = product.getPrixHT();
-			totalHT += prixHT;
 			String sPrixHT = format(prixHT);
-			
-			double productTaxe = product.getTaxe();
-			totalTaxe += productTaxe;
 
 			String sProduct = product.getName().concat(" : ").concat(sPrixHT).concat(sep);
 			report.append(sProduct);
 		}
-		
+
+		double totalTaxe = facture.getTotalTaxes();
 		report.append("Montant des taxes : ").append(format(totalTaxe)).append(sep)
 				.append("Total : ").append(format(totalHT));
 		return report.toString();
