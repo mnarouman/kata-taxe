@@ -12,7 +12,7 @@ public class ReportServices {
 		return INSTANCE;
 	}
 
-	public String report() {
+	public String report(double taxes, double total) {
 		return "Montant des taxes : 0.00" + sep +
 				"Total : 00.00";
 	}

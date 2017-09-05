@@ -28,7 +28,7 @@ public class ReportServicesTest {
 				"Total : 00.00";
 
 		// when
-		String actual = reportServices.report();
+		String actual = reportServices.report(0 , 0);
 
 		// then
 		assertThat(actual).isEqualTo(expected);
