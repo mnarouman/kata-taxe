@@ -28,7 +28,7 @@ public class ReportServicesTest {
 				"Total : 0.00";
 
 		// when
-		String actual = reportServices.report(0 , 0);
+		String actual = reportServices.report(0, 0);
 
 		// then
 		assertThat(actual).isEqualTo(expected);
@@ -41,7 +41,6 @@ public class ReportServicesTest {
 				"Total : 0.00";
 		double taxes = 0;
 		double total = 0;
-		
 
 		// when
 		String actual = reportServices.report(taxes, total);
@@ -57,10 +56,26 @@ public class ReportServicesTest {
 				"Total : 1.00";
 		double taxes = 1;
 		double total = 1;
-		
 
 		// when
 		String actual = reportServices.report(taxes, total);
+
+		// then
+		assertThat(actual).isEqualTo(expected);
+	}
+
+	@Test
+	public void afficheTotalFor1Product() {
+		// given
+		String expected = "1 CD musical : 16.49" + sep +
+				"Montant des taxes : 0.00" + sep +
+				"Total : 0.00";
+		// and
+		Product product = new Product();
+		product.setPrixHT(16.49d);
+
+		// when
+		String actual = reportServices.report(product);
 
 		// then
 		assertThat(actual).isEqualTo(expected);
