@@ -6,11 +6,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import my.toolkit.test.katataxe.services.report.ReportServices;
+
 public class ReportServicesTest {
 	private String sep = System.getProperty("line.separator");
-	
+	private ReportServices reportServices;
+
 	@Before
 	public void setUp() throws Exception {
+		reportServices = ReportServices.getInstance();
 	}
 
 	@After
@@ -19,14 +23,14 @@ public class ReportServicesTest {
 
 	@Test
 	public void afficheTotal() {
-		//given
-		String expected = "Montant des taxes : 0.00"+sep+
-						   "Total : 00.00"; 
-		
-		//when
+		// given
+		String expected = "Montant des taxes : 0.00" + sep +
+				"Total : 00.00";
+
+		// when
 		String actual = reportServices.report();
-		
-		//then
+
+		// then
 		assertThat(actual).isEqualTo(expected);
 	}
 
