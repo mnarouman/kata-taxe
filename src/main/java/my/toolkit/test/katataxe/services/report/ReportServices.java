@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import my.toolkit.test.katataxe.domain.product.Product;
+
 public class ReportServices {
 	private String sep = System.getProperty("line.separator");
 	private static final ReportServices INSTANCE = new ReportServices();
@@ -21,16 +23,21 @@ public class ReportServices {
 		return INSTANCE;
 	}
 
-	public String report(double taxes, double total) {
-		String sTotal = format(total);
-		String sTaxe = format(taxes);
-		String report = "Montant des taxes : ".concat(sTaxe).concat(sep)
-				.concat("Total : ").concat(sTotal);
-		return report;
-	}
-
 	private String format(double d) {
 		String doubleFormated = f.format(d);
 		return doubleFormated;
+	}
+
+	public String report(Product product) {
+		double total = product.getPrixHT();
+		String sTotal = format(total);
+		double taxes = product.getTaxe();
+		String sTaxe = format(taxes);
+		String products = product.getName().concat(" : ").concat(sTotal).concat(sep);
+		
+		String report = products
+				.concat("Montant des taxes : ").concat(sTaxe).concat(sep)
+				.concat("Total : ").concat(sTotal);
+		return report;
 	}
 }

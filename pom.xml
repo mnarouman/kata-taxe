@@ -4,7 +4,7 @@
 	<groupId>my.toolkit.test</groupId>
 	<artifactId>kata-taxe</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	
+
 	<packaging>jar</packaging>
 	<name>kata-taxe</name>
 	<url>http://maven.apache.org</url>
@@ -28,5 +28,11 @@
 			<artifactId>assertj-core</artifactId>
 			<version>3.8.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>19.0</version>
+		</dependency>
+
 	</dependencies>
 </project>

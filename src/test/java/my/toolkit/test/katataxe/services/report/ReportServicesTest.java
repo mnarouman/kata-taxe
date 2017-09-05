@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import my.toolkit.test.katataxe.domain.product.Product;
 import my.toolkit.test.katataxe.services.report.ReportServices;
 
 public class ReportServicesTest {
@@ -24,11 +25,16 @@ public class ReportServicesTest {
 	@Test
 	public void afficheTotal() {
 		// given
-		String expected = "Montant des taxes : 0.00" + sep +
+		String products = " : 0.00" + sep;
+		String expected = products +
+				"Montant des taxes : 0.00" + sep +
 				"Total : 0.00";
+		
+		//and
+		Product product = Product.builder().withPrixHT(0).withTaxe(0).build();
 
 		// when
-		String actual = reportServices.report(0, 0);
+		String actual = reportServices.report(product);
 
 		// then
 		assertThat(actual).isEqualTo(expected);
@@ -37,13 +43,14 @@ public class ReportServicesTest {
 	@Test
 	public void afficheTotalFormatFor0() {
 		// given
-		String expected = "Montant des taxes : 0.00" + sep +
+		String products = " : 0.00" + sep;
+		String expected = products +
+				"Montant des taxes : 0.00" + sep +
 				"Total : 0.00";
-		double taxes = 0;
-		double total = 0;
-
+		Product product = Product.builder().withPrixHT(0).withTaxe(0).build();
+		
 		// when
-		String actual = reportServices.report(taxes, total);
+		String actual = reportServices.report(product);
 
 		// then
 		assertThat(actual).isEqualTo(expected);
@@ -52,13 +59,14 @@ public class ReportServicesTest {
 	@Test
 	public void afficheTotalFormatFor1() {
 		// given
-		String expected = "Montant des taxes : 1.00" + sep +
+		String products = " : 1.00" + sep;
+		String expected = products +
+				"Montant des taxes : 1.00" + sep +
 				"Total : 1.00";
-		double taxes = 1;
-		double total = 1;
-
+		Product product = Product.builder().withPrixHT(1).withTaxe(1).build();
+		
 		// when
-		String actual = reportServices.report(taxes, total);
+		String actual = reportServices.report(product);
 
 		// then
 		assertThat(actual).isEqualTo(expected);
@@ -67,12 +75,12 @@ public class ReportServicesTest {
 	@Test
 	public void afficheTotalFor1Product() {
 		// given
-		String expected = "1 CD musical : 16.49" + sep +
+		String products = "1 CD musical : 16.49" + sep;
+		String expected = products +
 				"Montant des taxes : 0.00" + sep +
-				"Total : 0.00";
+				"Total : 16.49";
 		// and
-		Product product = new Product();
-		product.setPrixHT(16.49d);
+		Product product = Product.builder().withName("1 CD musical").withPrixHT(16.49d).withTaxe(0).build();
 
 		// when
 		String actual = reportServices.report(product);
