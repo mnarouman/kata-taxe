@@ -1,4 +1,4 @@
-package my.toolkit.test.katataxe;
+package my.toolkit.test.katataxe.services.report;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,4 +34,19 @@ public class ReportServicesTest {
 		assertThat(actual).isEqualTo(expected);
 	}
 
+	@Test
+	public void afficheTotalFormatFor0() {
+		// given
+		String expected = "Montant des taxes : 0.00" + sep +
+				"Total : 00.00";
+		double taxes = 0;
+		double total = 0;
+		
+
+		// when
+		String actual = reportServices.report(taxes, total);
+
+		// then
+		assertThat(actual).isEqualTo(expected);
+	}
 }
