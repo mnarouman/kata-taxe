@@ -49,4 +49,20 @@ public class ReportServicesTest {
 		// then
 		assertThat(actual).isEqualTo(expected);
 	}
+	@Test
+	public void afficheTotalFormatFor1() {
+		// given
+		String expected = "Montant des taxes : 1.00" + sep +
+				"Total : 1.00";
+		double taxes = 1;
+		double total = 1;
+		
+
+		// when
+		String actual = reportServices.report(taxes, total);
+
+		// then
+		assertThat(actual).isEqualTo(expected);
+	}
+
 }
