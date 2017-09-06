@@ -149,4 +149,32 @@ public class ReportServicesTest {
 		assertThat(actual).isEqualTo(expected);
 	}
 
+	// C'est l'output 1
+	@Test
+	public void afficheTotalFor2ProductsWithExempted() {
+		// given
+		String sProducts = "1 livre : 12.49" + sep +
+				"1 CD musical : 16.49"+sep+
+				"1 barre de chocolat : 0.85";
+		String expected = sProducts + sep +
+				"Montant des taxes : 1.50" + sep +
+				"Total : 29.83";
+		// and
+		Product product1 = Product.builder().withName("1 livre").withPrixHT(12.49d).build();
+		Product product2 = Product.builder().withName("1 CD musical").withPrixHT(14.99d).build();
+		Product product3 = Product.builder().withName("1 barre de chocolat").withPrixHT(0.85d).build();
+
+		products.add(product1);
+		products.add(product2);
+		products.add(product3);
+
+		Command command = Command.builder().withId(1).withProducts(products).build();
+
+		// when
+		String actual = reportServices.report(command);
+
+		// then
+		assertThat(actual).isEqualTo(expected);
+	}
+
 }
