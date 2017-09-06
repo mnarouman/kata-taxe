@@ -34,15 +34,21 @@ public class TaxeProvider {
 
 	}
 
-	/** 
-	 * This is just a dummy method that can be called by the client. Replace
-	 * this method by another one which you really need.
-	 */
-	public void doSomething() {
-	}
+	public double round(double taxe) {
+		if (taxe % 1 != 0) {
+			// ne garde que 2 zéros apres la virgule
+			taxe = Math.floor(taxe * 100) / 100;
 
-	public double round(double input) {
-		return 1.00;
+			if (taxe % 5 != 0 && taxe % 5 != 5) {
+
+				double tmp = ((double) (long) (taxe * 20)) / 20;
+
+				if (taxe > tmp) {
+					taxe = tmp + 0.05;
+				} 
+			}
+		}
+		return taxe;
 	}
 
 }
