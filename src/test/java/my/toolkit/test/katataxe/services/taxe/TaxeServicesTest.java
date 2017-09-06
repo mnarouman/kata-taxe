@@ -6,8 +6,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import my.toolkit.test.katataxe.domain.product.Product;
-
 public class TaxeServicesTest {
 
 	@Before
@@ -21,6 +19,7 @@ public class TaxeServicesTest {
 	@Test
 	public void arrondiWhen0_99Then1_00() {
 		//given
+		TaxeProvider taxeProvider = TaxeProvider.getUniqueInstance();
 		double input = 0.99;
 		double expected = 1.00;
 		
