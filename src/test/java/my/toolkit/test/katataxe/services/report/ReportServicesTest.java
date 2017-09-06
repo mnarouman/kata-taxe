@@ -134,7 +134,10 @@ public class ReportServicesTest {
 				"Montant des taxes : 1.65" + sep +
 				"Total : 18,14";
 		// and
-		Product product = Product.builder().withName("1 CD musical").withPrixHT(16.49d).withTaxe(0).build();
+		Product product = Product.builder().withName("1 CD musical")
+										   .withPrixHT(16.49d)
+										   .withTaxe(10)
+										   .build();
 		products.add(product);
 		Command command = Command.builder().withId(1).withProducts(products).build();
 
