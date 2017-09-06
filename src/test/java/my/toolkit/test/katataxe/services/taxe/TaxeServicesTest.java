@@ -56,4 +56,17 @@ public class TaxeServicesTest {
 		//then
 		assertThat(actual).isEqualTo(expected);
 	}
+	
+	@Test
+	public void arrondiWhen1_02Then1_05() {
+		//given
+		double input = 1.02;
+		double expected = 1.05;
+		
+		//when
+		double actual = taxeProvider.round(input);
+		
+		//then
+		assertThat(actual).isEqualTo(expected);
+	}
 }

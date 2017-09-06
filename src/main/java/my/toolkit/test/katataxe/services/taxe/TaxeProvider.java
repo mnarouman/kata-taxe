@@ -29,26 +29,26 @@ public class TaxeProvider {
 	 * Get the unique instance of this class.
 	 */
 	public static synchronized TaxeProvider getUniqueInstance() {
-
 		return sInstance;
-
 	}
 
 	public double round(double taxe) {
 		if (taxe % 1 != 0) {
-			// ne garde que 2 zéros apres la virgule
 			taxe = Math.floor(taxe * 100) / 100;
-
-			if (taxe % 5 != 0 && taxe % 5 != 5) {
-
-				double tmp = ((double) (long) (taxe * 20)) / 20;
-
-				if (taxe > tmp) {
-					taxe = tmp + 0.05;
-				} 
-			}
+			taxe = roundUp5Cents(taxe);
 		}
 		return taxe;
 	}
 
+	private double roundUp5Cents(double taxe) {
+		if (taxe % 5 != 0 && taxe % 5 != 5) {
+
+			double tmp = ((double) (long) (taxe * 20)) / 20;
+
+			if (taxe > tmp) {
+				taxe = tmp + 0.05;
+			} 
+		}
+		return taxe;
+	}
 }
