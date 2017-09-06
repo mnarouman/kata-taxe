@@ -2,6 +2,8 @@ package my.toolkit.test.katataxe.domain.product;
 
 import javax.annotation.Generated;
 
+import my.toolkit.test.katataxe.domain.product.factory.AbstractProduct;
+
 public class DefaultProduct extends AbstractProduct {
 
 	@Generated("SparkTools")
@@ -10,6 +12,7 @@ public class DefaultProduct extends AbstractProduct {
 		this.prixHT = builder.prixHT;
 		this.prixTTC = builder.prixTTC;
 		this.taxe = builder.taxe;
+		this.imported = builder.imported;
 	}
 
 	/**
@@ -30,6 +33,7 @@ public class DefaultProduct extends AbstractProduct {
 		private double prixHT;
 		private double prixTTC;
 		private double taxe;
+		private boolean imported;
 
 		private Builder() {
 		}
@@ -54,9 +58,16 @@ public class DefaultProduct extends AbstractProduct {
 			return this;
 		}
 
+		public Builder withImported(boolean imported) {
+			this.imported = imported;
+			return this;
+		}
+
 		public DefaultProduct build() {
 			return new DefaultProduct(this);
 		}
 	}
+
+	
 
 }

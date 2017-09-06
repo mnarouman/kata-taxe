@@ -6,6 +6,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import my.toolkit.test.katataxe.domain.product.DefaultProduct;
+import my.toolkit.test.katataxe.domain.product.factory.IProduct;
+
 public class TaxeServicesTest {
 	private TaxeProvider taxeProvider ;
 	
@@ -68,5 +71,26 @@ public class TaxeServicesTest {
 		
 		//then
 		assertThat(actual).isEqualTo(expected);
+	}
+	
+	@Test
+	public void appliqueTaxe10Perc() {
+		TaxeServices taxeServices = TaxeServices.getUniqueInstance();
+		//given
+		IProduct product = DefaultProduct.builder().withName("1 CD musical")
+										   .withPrixHT(16.49d)
+										   .withTaxe(10)
+										   .build();
+		
+		double expectedPrixTTC = 18.14;
+		double expectedTaxe = 1.65;
+		
+		
+		//when
+		IProduct taxedProduct = taxeServices.taxe(product);
+		
+		//then
+		assertThat(taxedProduct.getPrixTTC()).isEqualTo(expectedPrixTTC);
+		assertThat(taxedProduct.getTaxe()).isEqualTo(expectedTaxe);
 	}
 }

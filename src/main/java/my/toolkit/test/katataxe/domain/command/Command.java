@@ -8,7 +8,7 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.ComparisonChain;
 
-import my.toolkit.test.katataxe.domain.product.IProduct;
+import my.toolkit.test.katataxe.domain.product.factory.IProduct;
 
 public class Command implements Comparable<Command> {
 	private long id;

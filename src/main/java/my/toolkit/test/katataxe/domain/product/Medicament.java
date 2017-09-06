@@ -2,6 +2,8 @@ package my.toolkit.test.katataxe.domain.product;
 
 import javax.annotation.Generated;
 
+import my.toolkit.test.katataxe.domain.product.factory.AbstractProduct;
+
 public class Medicament extends AbstractProduct {
 
 	@Generated("SparkTools")
@@ -12,15 +14,6 @@ public class Medicament extends AbstractProduct {
 		this.taxe = builder.taxe;
 	}
 
-	/**
-	 * Creates builder to build {@link Medicament}.
-	 * 
-	 * @return created builder
-	 */
-	@Generated("SparkTools")
-	public static Builder builder() {
-		return new Builder();
-	}
 
 	/**
 	 * Builder to build {@link Medicament}.

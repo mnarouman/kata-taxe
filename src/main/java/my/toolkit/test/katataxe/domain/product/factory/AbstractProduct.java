@@ -1,4 +1,4 @@
-package my.toolkit.test.katataxe.domain.product;
+package my.toolkit.test.katataxe.domain.product.factory;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
@@ -10,6 +10,7 @@ public class AbstractProduct implements Comparable<AbstractProduct>, IProduct {
 	protected double prixHT;
 	protected double prixTTC;
 	protected double taxe;
+	protected boolean imported;
 
 	public AbstractProduct() {
 		super();
@@ -68,4 +69,7 @@ public class AbstractProduct implements Comparable<AbstractProduct>, IProduct {
 		this.prixTTC = prixTTC;
 	}
 
+	public boolean isImported() {
+		return imported;
+	}
 }

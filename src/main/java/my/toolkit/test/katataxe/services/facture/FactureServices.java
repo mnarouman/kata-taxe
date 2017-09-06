@@ -9,8 +9,9 @@ import java.util.List;
 import my.toolkit.test.katataxe.domain.command.Command;
 import my.toolkit.test.katataxe.domain.facture.Facture;
 import my.toolkit.test.katataxe.domain.product.DefaultProduct;
-import my.toolkit.test.katataxe.domain.product.IProduct;
+import my.toolkit.test.katataxe.domain.product.factory.IProduct;
 import my.toolkit.test.katataxe.services.taxe.TaxeProvider;
+import my.toolkit.test.katataxe.services.taxe.TaxeServices;
 
 /**
  * PatternBox: "Singleton" implementation.
@@ -23,7 +24,7 @@ import my.toolkit.test.katataxe.services.taxe.TaxeProvider;
  * @author mnarouman
  */
 public class FactureServices {
-	private TaxeProvider taxeProvider = TaxeProvider.getUniqueInstance();
+	private TaxeServices taxeServices = TaxeServices.getUniqueInstance();
 
 	/** unique instance */
 	private static final FactureServices sInstance = new FactureServices();
@@ -56,7 +57,7 @@ public class FactureServices {
 			double prixHT = product.getPrixHT();
 			totalHT += prixHT;
 			
-			IProduct taxedProduct = taxe(product);
+			IProduct taxedProduct = taxeServices.taxe(product);
 			
 			double productTaxe = taxedProduct.getTaxe();
 			totalTaxe += productTaxe;
@@ -80,23 +81,6 @@ public class FactureServices {
 		return facture;
 	}
 
-	public IProduct taxe(IProduct product) {
-		if (product.isExemptedTaxe()) {
-			product.setPrixTTC(product.getPrixHT());
-			return product;
-		}
-		double prixHT = product.getPrixHT();
-		
-		double taxe = taxeProvider.roundTaxe((prixHT / 100) * 10);
-		double prixTTC = taxeProvider.roundPrix(prixHT + taxe);
-		
-		product = DefaultProduct.builder().withName(product.getName())
-								   .withPrixHT(prixHT)
-								   .withPrixTTC(prixTTC)
-								   .withTaxe(taxe)
-								   .build();
-		
-		return product;
-	}
+	
 
 }

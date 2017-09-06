@@ -2,6 +2,8 @@ package my.toolkit.test.katataxe.domain.product;
 
 import javax.annotation.Generated;
 
+import my.toolkit.test.katataxe.domain.product.factory.AbstractProduct;
+
 public class Livre extends AbstractProduct {
 
 	@Generated("SparkTools")
@@ -10,11 +12,16 @@ public class Livre extends AbstractProduct {
 		this.prixHT = builder.prixHT;
 		this.prixTTC = builder.prixTTC;
 		this.taxe = builder.taxe;
+		this.imported = builder.imported;
+	}
+
+	@Override
+	public boolean isExemptedTaxe() {
+		return true;
 	}
 
 	/**
 	 * Creates builder to build {@link Livre}.
-	 * 
 	 * @return created builder
 	 */
 	@Generated("SparkTools")
@@ -31,6 +38,7 @@ public class Livre extends AbstractProduct {
 		private double prixHT;
 		private double prixTTC;
 		private double taxe;
+		private boolean imported;
 
 		private Builder() {
 		}
@@ -55,14 +63,13 @@ public class Livre extends AbstractProduct {
 			return this;
 		}
 
+		public Builder withImported(boolean imported) {
+			this.imported = imported;
+			return this;
+		}
+
 		public Livre build() {
 			return new Livre(this);
 		}
 	}
-
-	@Override
-	public boolean isExemptedTaxe() {
-		return true;
-	}
-
 }

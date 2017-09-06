@@ -9,7 +9,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.ComparisonChain;
 
 import my.toolkit.test.katataxe.domain.command.Command;
-import my.toolkit.test.katataxe.domain.product.IProduct;
+import my.toolkit.test.katataxe.domain.product.factory.IProduct;
 
 public class Facture implements Comparable<Facture> {
 	private long id;

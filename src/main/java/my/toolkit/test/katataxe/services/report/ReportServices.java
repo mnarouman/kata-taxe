@@ -7,7 +7,7 @@ import java.util.Locale;
 
 import my.toolkit.test.katataxe.domain.command.Command;
 import my.toolkit.test.katataxe.domain.facture.Facture;
-import my.toolkit.test.katataxe.domain.product.IProduct;
+import my.toolkit.test.katataxe.domain.product.factory.IProduct;
 import my.toolkit.test.katataxe.services.command.CommandServices;
 
 public class ReportServices {
