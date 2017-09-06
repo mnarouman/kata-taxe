@@ -10,12 +10,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import my.toolkit.test.katataxe.domain.command.Command;
-import my.toolkit.test.katataxe.domain.product.Product;
+import my.toolkit.test.katataxe.domain.product.DefaultProduct;
+import my.toolkit.test.katataxe.domain.product.IProduct;
+import my.toolkit.test.katataxe.domain.product.Livre;
+import my.toolkit.test.katataxe.domain.product.Nourriture;
 
 public class ReportServicesTest {
 	private String sep = System.getProperty("line.separator");
 	private ReportServices reportServices;
-	private List<Product> products;
+	private List<IProduct> products;
 
 	@Before
 	public void setUp() throws Exception {
@@ -36,7 +39,7 @@ public class ReportServicesTest {
 				"Total : 0.00";
 
 		// and
-		Product product = Product.builder().withName("").withPrixHT(0).withTaxe(0).build();
+		DefaultProduct product = DefaultProduct.builder().withName("").withPrixHT(0).withTaxe(0).build();
 		products.add(product);
 		Command command = Command.builder().withId(1).withProducts(products).build();
 
@@ -54,7 +57,7 @@ public class ReportServicesTest {
 		String expected = sProducts +
 				"Montant des taxes : 0.00" + sep +
 				"Total : 0.00";
-		Product product = Product.builder().withName("").withPrixHT(0).withTaxe(0).build();
+		DefaultProduct product = DefaultProduct.builder().withName("").withPrixHT(0).withTaxe(0).build();
 		products.add(product);
 		Command command = Command.builder().withId(1).withProducts(products).build();
 
@@ -73,7 +76,7 @@ public class ReportServicesTest {
 				"Montant des taxes : 0.10" + sep +
 				"Total : 1.10";
 		// and
-		Product product = Product.builder().withName("").withPrixHT(1).build();
+		DefaultProduct product = DefaultProduct.builder().withName("").withPrixHT(1).build();
 		products.add(product);
 		Command command = Command.builder().withId(1).withProducts(products).build();
 
@@ -92,7 +95,7 @@ public class ReportServicesTest {
 				"Montant des taxes : 1.65" + sep +
 				"Total : 18.14";
 		// and
-		Product product = Product.builder().withName("1 CD musical").withPrixHT(16.49d).build();
+		DefaultProduct product = DefaultProduct.builder().withName("1 CD musical").withPrixHT(16.49d).build();
 		products.add(product);
 		Command command = Command.builder().withId(1).withProducts(products).build();
 
@@ -112,8 +115,8 @@ public class ReportServicesTest {
 				"Montant des taxes : 3.55" + sep +
 				"Total : 39.03";
 		// and
-		Product product1 = Product.builder().withName("1 CD musical").withPrixHT(16.49d).withTaxe(0).build();
-		Product product2 = Product.builder().withName("1 flacon de parfum").withPrixHT(18.99d).withTaxe(0).build();
+		DefaultProduct product1 = DefaultProduct.builder().withName("1 CD musical").withPrixHT(16.49d).withTaxe(0).build();
+		DefaultProduct product2 = DefaultProduct.builder().withName("1 flacon de parfum").withPrixHT(18.99d).withTaxe(0).build();
 
 		products.add(product1);
 		products.add(product2);
@@ -135,7 +138,7 @@ public class ReportServicesTest {
 				"Montant des taxes : 1.65" + sep +
 				"Total : 18.14";
 		// and
-		Product product = Product.builder().withName("1 CD musical")
+		DefaultProduct product = DefaultProduct.builder().withName("1 CD musical")
 				.withPrixHT(16.49d)
 				.withTaxe(10)
 				.build();
@@ -160,9 +163,9 @@ public class ReportServicesTest {
 				"Montant des taxes : 1.50" + sep +
 				"Total : 29.83";
 		// and
-		Product product1 = Product.builder().withName("1 livre").withPrixHT(12.49d).build();
-		Product product2 = Product.builder().withName("1 CD musical").withPrixHT(14.99d).build();
-		Product product3 = Product.builder().withName("1 barre de chocolat").withPrixHT(0.85d).build();
+		IProduct product1 = Livre.builder().withName("1 livre").withPrixHT(12.49d).build();
+		IProduct product2 = DefaultProduct.builder().withName("1 CD musical").withPrixHT(14.99d).build();
+		IProduct product3 = Nourriture.builder().withName("1 barre de chocolat").withPrixHT(0.85d).build();
 
 		products.add(product1);
 		products.add(product2);

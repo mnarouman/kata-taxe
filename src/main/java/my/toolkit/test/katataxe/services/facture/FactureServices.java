@@ -8,7 +8,8 @@ import java.util.List;
 
 import my.toolkit.test.katataxe.domain.command.Command;
 import my.toolkit.test.katataxe.domain.facture.Facture;
-import my.toolkit.test.katataxe.domain.product.Product;
+import my.toolkit.test.katataxe.domain.product.DefaultProduct;
+import my.toolkit.test.katataxe.domain.product.IProduct;
 import my.toolkit.test.katataxe.services.taxe.TaxeProvider;
 
 /**
@@ -44,18 +45,18 @@ public class FactureServices {
 	}
 
 	public Facture createFacture(Command command) {
-		List<Product> products = command.getProducts();
-		List<Product> taxedProducts = new ArrayList<Product>(products.size());
+		List<IProduct> products = command.getProducts();
+		List<IProduct> taxedProducts = new ArrayList<IProduct>(products.size());
 		double totalHT = 0;
 		double totalTTC = 0;
 		double totalTaxe = 0;
 
-		for (Product product : products) {
+		for (IProduct product : products) {
 
 			double prixHT = product.getPrixHT();
 			totalHT += prixHT;
 			
-			Product taxedProduct = taxe(product);
+			IProduct taxedProduct = taxe(product);
 			
 			double productTaxe = taxedProduct.getTaxe();
 			totalTaxe += productTaxe;
@@ -79,14 +80,17 @@ public class FactureServices {
 		return facture;
 	}
 
-	public Product taxe(Product product) {
-		
+	public IProduct taxe(IProduct product) {
+		if (product.isExemptedTaxe()) {
+			product.setPrixTTC(product.getPrixHT());
+			return product;
+		}
 		double prixHT = product.getPrixHT();
 		
 		double taxe = taxeProvider.roundTaxe((prixHT / 100) * 10);
 		double prixTTC = taxeProvider.roundPrix(prixHT + taxe);
 		
-		product = Product.builder().withName(product.getName())
+		product = DefaultProduct.builder().withName(product.getName())
 								   .withPrixHT(prixHT)
 								   .withPrixTTC(prixTTC)
 								   .withTaxe(taxe)

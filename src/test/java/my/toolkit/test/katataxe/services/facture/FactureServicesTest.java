@@ -9,11 +9,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import my.toolkit.test.katataxe.domain.product.Product;
+import my.toolkit.test.katataxe.domain.product.DefaultProduct;
+import my.toolkit.test.katataxe.domain.product.IProduct;
 
 public class FactureServicesTest {
 
-	private List<Product> products;
+	private List<DefaultProduct> products;
 
 	@Before
 	public void setUp() throws Exception {
@@ -28,7 +29,7 @@ public class FactureServicesTest {
 	public void appliqueTaxe10Perc() {
 		FactureServices factureServices = FactureServices.getUniqueInstance();
 		//given
-		Product product = Product.builder().withName("1 CD musical")
+		DefaultProduct product = DefaultProduct.builder().withName("1 CD musical")
 										   .withPrixHT(16.49d)
 										   .withTaxe(10)
 										   .build();
@@ -38,7 +39,7 @@ public class FactureServicesTest {
 		
 		
 		//when
-		Product taxedProduct = factureServices.taxe(product);
+		IProduct taxedProduct = factureServices.taxe(product);
 		
 		//then
 		assertThat(taxedProduct.getPrixTTC()).isEqualTo(expectedPrixTTC);

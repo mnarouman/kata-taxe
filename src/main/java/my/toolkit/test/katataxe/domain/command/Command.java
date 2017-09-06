@@ -2,15 +2,17 @@ package my.toolkit.test.katataxe.domain.command;
 
 import java.util.List;
 
-import my.toolkit.test.katataxe.domain.product.Product;
 import javax.annotation.Generated;
-import com.google.common.collect.ComparisonChain;
-import com.google.common.base.Objects;
+
 import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
+import com.google.common.collect.ComparisonChain;
+
+import my.toolkit.test.katataxe.domain.product.IProduct;
 
 public class Command implements Comparable<Command> {
 	private long id;
-	private List<Product> products;
+	private List<IProduct> products;
 
 	@Generated("SparkTools")
 	private Command(Builder builder) {
@@ -18,7 +20,7 @@ public class Command implements Comparable<Command> {
 		this.products = builder.products;
 	}
 
-	public List<Product> getProducts() {
+	public List<IProduct> getProducts() {
 		return products;
 	}
 
@@ -66,7 +68,7 @@ public class Command implements Comparable<Command> {
 	@Generated("SparkTools")
 	public static final class Builder {
 		private long id;
-		private List<Product> products;
+		private List<IProduct> products;
 
 		private Builder() {
 		}
@@ -76,7 +78,7 @@ public class Command implements Comparable<Command> {
 			return this;
 		}
 
-		public Builder withProducts(List<Product> products) {
+		public Builder withProducts(List<IProduct> products) {
 			this.products = products;
 			return this;
 		}
