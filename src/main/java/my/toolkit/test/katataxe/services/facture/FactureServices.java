@@ -8,6 +8,8 @@ import java.util.List;
 import my.toolkit.test.katataxe.domain.command.Command;
 import my.toolkit.test.katataxe.domain.facture.Facture;
 import my.toolkit.test.katataxe.domain.product.Product;
+import my.toolkit.test.katataxe.services.taxe.TaxeProvider;
+import my.toolkit.test.katataxe.services.taxe.TaxeServicesTest;
 
 /**
  * PatternBox: "Singleton" implementation.
@@ -57,6 +59,18 @@ public class FactureServices {
 		Facture facture = Facture.builder().withId(command.getId()).withPrixHT(totalHT).withTotalTaxes(totalTaxe).withCommand(command).build();
 
 		return facture;
+	}
+
+	public Product taxe(Product product) {
+		TaxeProvider taxeProvider = TaxeProvider.getUniqueInstance();
+		
+		double prixHT = product.getPrixHT();
+		
+		double taxe = taxeProvider.roundTaxe((prixHT / 100) * 10);
+		double prixTTC = taxeProvider.roundPrix(prixHT + taxe);
+		
+		product = product.builder().withPrixTTC(prixTTC).withTaxe(taxe).build();
+		return product;
 	}
 
 }

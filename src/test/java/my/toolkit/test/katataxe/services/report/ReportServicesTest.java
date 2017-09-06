@@ -36,7 +36,7 @@ public class ReportServicesTest {
 				"Total : 0.00";
 
 		// and
-		Product product = Product.builder().withPrixHT(0).withTaxe(0).build();
+		Product product = Product.builder().withName("").withPrixHT(0).withTaxe(0).build();
 		products.add(product);
 		Command command = Command.builder().withId(1).withProducts(products).build();
 
@@ -54,7 +54,7 @@ public class ReportServicesTest {
 		String expected = sProducts +
 				"Montant des taxes : 0.00" + sep +
 				"Total : 0.00";
-		Product product = Product.builder().withPrixHT(0).withTaxe(0).build();
+		Product product = Product.builder().withName("").withPrixHT(0).withTaxe(0).build();
 		products.add(product);
 		Command command = Command.builder().withId(1).withProducts(products).build();
 
@@ -72,7 +72,7 @@ public class ReportServicesTest {
 		String expected = sProducts +
 				"Montant des taxes : 1.00" + sep +
 				"Total : 1.00";
-		Product product = Product.builder().withPrixHT(1).withTaxe(1).build();
+		Product product = Product.builder().withName("").withPrixHT(1).withTaxe(1).build();
 		products.add(product);
 		Command command = Command.builder().withId(1).withProducts(products).build();
 

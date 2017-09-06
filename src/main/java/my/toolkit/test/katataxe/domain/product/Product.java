@@ -9,12 +9,14 @@ public class Product implements Comparable<Product> {
 
 	private String name = "";
 	private double prixHT;
+	private double prixTTC;
 	private double taxe;
 
 	@Generated("SparkTools")
 	private Product(Builder builder) {
 		this.name = builder.name;
 		this.prixHT = builder.prixHT;
+		this.prixTTC = builder.prixTTC;
 		this.taxe = builder.taxe;
 	}
 
@@ -49,14 +51,12 @@ public class Product implements Comparable<Product> {
 		return Objects.hashCode(name, prixHT, taxe);
 	}
 
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this).add("name", name).add("prixHT", prixHT).add("taxe", taxe).toString();
+	public double getPrixTTC() {
+		return prixTTC;
 	}
 
 	/**
 	 * Creates builder to build {@link Product}.
-	 * 
 	 * @return created builder
 	 */
 	@Generated("SparkTools")
@@ -69,8 +69,9 @@ public class Product implements Comparable<Product> {
 	 */
 	@Generated("SparkTools")
 	public static final class Builder {
-		private String name = "";
+		private String name;
 		private double prixHT;
+		private double prixTTC;
 		private double taxe;
 
 		private Builder() {
@@ -86,6 +87,11 @@ public class Product implements Comparable<Product> {
 			return this;
 		}
 
+		public Builder withPrixTTC(double prixTTC) {
+			this.prixTTC = prixTTC;
+			return this;
+		}
+
 		public Builder withTaxe(double taxe) {
 			this.taxe = taxe;
 			return this;
@@ -94,6 +100,11 @@ public class Product implements Comparable<Product> {
 		public Product build() {
 			return new Product(this);
 		}
+	}
+
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this).add("name", name).add("prixHT", prixHT).add("prixTTC", prixTTC).add("taxe", taxe).toString();
 	}
 
 }

@@ -25,7 +25,7 @@ public class TaxeServicesTest {
 		double expected = 1.00;
 		
 		//when
-		double actual = taxeProvider.round(input);
+		double actual = taxeProvider.roundTaxe(input);
 		
 		//then
 		assertThat(actual).isEqualTo(expected);
@@ -38,7 +38,7 @@ public class TaxeServicesTest {
 		double expected = 1.00;
 		
 		//when
-		double actual = taxeProvider.round(input);
+		double actual = taxeProvider.roundTaxe(input);
 		
 		//then
 		assertThat(actual).isEqualTo(expected);
@@ -51,7 +51,7 @@ public class TaxeServicesTest {
 		double expected = 1.05;
 		
 		//when
-		double actual = taxeProvider.round(input);
+		double actual = taxeProvider.roundTaxe(input);
 		
 		//then
 		assertThat(actual).isEqualTo(expected);
@@ -64,7 +64,7 @@ public class TaxeServicesTest {
 		double expected = 1.05;
 		
 		//when
-		double actual = taxeProvider.round(input);
+		double actual = taxeProvider.roundTaxe(input);
 		
 		//then
 		assertThat(actual).isEqualTo(expected);

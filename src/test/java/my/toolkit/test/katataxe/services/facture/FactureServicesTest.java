@@ -38,11 +38,11 @@ public class FactureServicesTest {
 		
 		
 		//when
-		factureServices.taxe(product);
+		Product taxedProduct = factureServices.taxe(product);
 		
 		//then
-		assertThat(product.getPrixTTC()).isEqualTo(expectedPrixTTC);
-		assertThat(product.getTaxe()).isEqualTo(expectedTaxe);
+		assertThat(taxedProduct.getPrixTTC()).isEqualTo(expectedPrixTTC);
+		assertThat(taxedProduct.getTaxe()).isEqualTo(expectedTaxe);
 		
 		
 	}

@@ -32,22 +32,30 @@ public class TaxeProvider {
 		return sInstance;
 	}
 
-	public double round(double taxe) {
+	public double roundTaxe(double taxe) {
+		double roundedTaxe = roundPrix(taxe);
+		roundedTaxe = roundUp5Cents(roundedTaxe);
+		return roundedTaxe;
+	}
+
+	public double roundPrix(double taxe) {
 		if (taxe % 1 != 0) {
-			taxe = Math.floor(taxe * 100) / 100;
-			taxe = roundUp5Cents(taxe);
+			double nbApVirg = 2;
+			taxe = (double)((int)(taxe * Math.pow(10,nbApVirg ) + .5)) / Math.pow(10,nbApVirg);
 		}
 		return taxe;
 	}
 
 	private double roundUp5Cents(double taxe) {
+		double nbApVirg = 2;
 		if (taxe % 5 != 0 && taxe % 5 != 5) {
 
 			double tmp = ((double) (long) (taxe * 20)) / 20;
 
 			if (taxe > tmp) {
 				taxe = tmp + 0.05;
-			} 
+			}
+			taxe = (double)((int)(taxe * Math.pow(10,nbApVirg ) + .5)) / Math.pow(10,nbApVirg);
 		}
 		return taxe;
 	}
