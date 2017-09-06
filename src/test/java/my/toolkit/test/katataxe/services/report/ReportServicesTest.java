@@ -125,4 +125,24 @@ public class ReportServicesTest {
 		// then
 		assertThat(actual).isEqualTo(expected);
 	}
+
+	@Test
+	public void afficheTotalFor1ProductTaxe() {
+		// given
+		String sProducts = "1 CD musical : 16.49" + sep;
+		String expected = sProducts +
+				"Montant des taxes : 1.65" + sep +
+				"Total : 18,14";
+		// and
+		Product product = Product.builder().withName("1 CD musical").withPrixHT(16.49d).withTaxe(0).build();
+		products.add(product);
+		Command command = Command.builder().withId(1).withProducts(products).build();
+
+		// when
+		String actual = reportServices.report(command);
+
+		// then
+		assertThat(actual).isEqualTo(expected);
+	}
+
 }
