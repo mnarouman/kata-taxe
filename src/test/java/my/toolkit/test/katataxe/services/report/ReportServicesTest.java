@@ -68,11 +68,12 @@ public class ReportServicesTest {
 	@Test
 	public void afficheTotalFormatFor1() {
 		// given
-		String sProducts = " : 1.00" + sep;
+		String sProducts = " : 1.10" + sep;
 		String expected = sProducts +
-				"Montant des taxes : 1.00" + sep +
-				"Total : 1.00";
-		Product product = Product.builder().withName("").withPrixHT(1).withTaxe(1).build();
+				"Montant des taxes : 0.10" + sep +
+				"Total : 1.10";
+		// and
+		Product product = Product.builder().withName("").withPrixHT(1).build();
 		products.add(product);
 		Command command = Command.builder().withId(1).withProducts(products).build();
 
@@ -86,12 +87,12 @@ public class ReportServicesTest {
 	@Test
 	public void afficheTotalFor1Product() {
 		// given
-		String sProducts = "1 CD musical : 16.49" + sep;
+		String sProducts = "1 CD musical : 18.14" + sep;
 		String expected = sProducts +
-				"Montant des taxes : 0.00" + sep +
-				"Total : 16.49";
+				"Montant des taxes : 1.65" + sep +
+				"Total : 18.14";
 		// and
-		Product product = Product.builder().withName("1 CD musical").withPrixHT(16.49d).withTaxe(0).build();
+		Product product = Product.builder().withName("1 CD musical").withPrixHT(16.49d).build();
 		products.add(product);
 		Command command = Command.builder().withId(1).withProducts(products).build();
 
@@ -105,14 +106,14 @@ public class ReportServicesTest {
 	@Test
 	public void afficheTotalFor2Products() {
 		// given
-		String sProducts = "1 CD musical : 16.49" + sep +
-				"1 flacon de parfum importé : 54.65";
+		String sProducts = "1 CD musical : 18.14" + sep +
+				"1 flacon de parfum : 20.89";
 		String expected = sProducts + sep +
-				"Montant des taxes : 0.00" + sep +
-				"Total : 71.14";
+				"Montant des taxes : 3.55" + sep +
+				"Total : 39.03";
 		// and
 		Product product1 = Product.builder().withName("1 CD musical").withPrixHT(16.49d).withTaxe(0).build();
-		Product product2 = Product.builder().withName("1 flacon de parfum importé").withPrixHT(54.65d).withTaxe(0).build();
+		Product product2 = Product.builder().withName("1 flacon de parfum").withPrixHT(18.99d).withTaxe(0).build();
 
 		products.add(product1);
 		products.add(product2);
@@ -129,15 +130,15 @@ public class ReportServicesTest {
 	@Test
 	public void afficheTotalFor1ProductTaxe() {
 		// given
-		String sProducts = "1 CD musical : 16.49" + sep;
+		String sProducts = "1 CD musical : 18.14" + sep;
 		String expected = sProducts +
 				"Montant des taxes : 1.65" + sep +
-				"Total : 18,14";
+				"Total : 18.14";
 		// and
 		Product product = Product.builder().withName("1 CD musical")
-										   .withPrixHT(16.49d)
-										   .withTaxe(10)
-										   .build();
+				.withPrixHT(16.49d)
+				.withTaxe(10)
+				.build();
 		products.add(product);
 		Command command = Command.builder().withId(1).withProducts(products).build();
 

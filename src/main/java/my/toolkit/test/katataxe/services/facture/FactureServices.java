@@ -3,13 +3,13 @@
  */
 package my.toolkit.test.katataxe.services.facture;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import my.toolkit.test.katataxe.domain.command.Command;
 import my.toolkit.test.katataxe.domain.facture.Facture;
 import my.toolkit.test.katataxe.domain.product.Product;
 import my.toolkit.test.katataxe.services.taxe.TaxeProvider;
-import my.toolkit.test.katataxe.services.taxe.TaxeServicesTest;
 
 /**
  * PatternBox: "Singleton" implementation.
@@ -22,6 +22,7 @@ import my.toolkit.test.katataxe.services.taxe.TaxeServicesTest;
  * @author mnarouman
  */
 public class FactureServices {
+	private TaxeProvider taxeProvider = TaxeProvider.getUniqueInstance();
 
 	/** unique instance */
 	private static final FactureServices sInstance = new FactureServices();
@@ -44,32 +45,53 @@ public class FactureServices {
 
 	public Facture createFacture(Command command) {
 		List<Product> products = command.getProducts();
+		List<Product> taxedProducts = new ArrayList<Product>(products.size());
 		double totalHT = 0;
+		double totalTTC = 0;
 		double totalTaxe = 0;
 
 		for (Product product : products) {
 
 			double prixHT = product.getPrixHT();
 			totalHT += prixHT;
-
-			double productTaxe = product.getTaxe();
+			
+			Product taxedProduct = taxe(product);
+			
+			double productTaxe = taxedProduct.getTaxe();
 			totalTaxe += productTaxe;
+			
+			totalTTC += taxedProduct.getPrixTTC();
+
+			taxedProducts.add(taxedProduct);
 		}
 
-		Facture facture = Facture.builder().withId(command.getId()).withPrixHT(totalHT).withTotalTaxes(totalTaxe).withCommand(command).build();
+		Command taxedCommand = Command.builder().withId(command.getId())
+												.withProducts(taxedProducts)
+												.build();
+		
+		Facture facture = Facture.builder().withId(command.getId())
+										   .withPrixHT(totalHT)
+										   .withTotalTaxes(totalTaxe)
+										   .withPrixTTC(totalTTC)
+										   .withCommand(taxedCommand)
+										   .build();
 
 		return facture;
 	}
 
 	public Product taxe(Product product) {
-		TaxeProvider taxeProvider = TaxeProvider.getUniqueInstance();
 		
 		double prixHT = product.getPrixHT();
 		
 		double taxe = taxeProvider.roundTaxe((prixHT / 100) * 10);
 		double prixTTC = taxeProvider.roundPrix(prixHT + taxe);
 		
-		product = product.builder().withPrixTTC(prixTTC).withTaxe(taxe).build();
+		product = Product.builder().withName(product.getName())
+								   .withPrixHT(prixHT)
+								   .withPrixTTC(prixTTC)
+								   .withTaxe(taxe)
+								   .build();
+		
 		return product;
 	}
 

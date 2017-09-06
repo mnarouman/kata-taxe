@@ -29,11 +29,6 @@ public class ReportServices {
 		return INSTANCE;
 	}
 
-	private String format(double d) {
-		String doubleFormated = f.format(d);
-		return doubleFormated;
-	}
-
 	public String report(Command command) {
 
 		Facture facture = commandServices.createFacture(command);
@@ -41,19 +36,25 @@ public class ReportServices {
 		List<Product> products = facture.getProducts();
 
 		StringBuffer report = new StringBuffer();
-		double totalHT = facture.getPrixHT();
+		double totalTTC = facture.getPrixTTC();
 
 		for (Product product : products) {
-			double prixHT = product.getPrixHT();
-			String sPrixHT = format(prixHT);
-
-			String sProduct = product.getName().concat(" : ").concat(sPrixHT).concat(sep);
+			double prixTTC = product.getPrixTTC();
+			String sPrixTTC = format(prixTTC);
+			
+			String sProduct = product.getName().concat(" : ").concat(sPrixTTC).concat(sep);
 			report.append(sProduct);
 		}
 
 		double totalTaxe = facture.getTotalTaxes();
 		report.append("Montant des taxes : ").append(format(totalTaxe)).append(sep)
-				.append("Total : ").append(format(totalHT));
+				.append("Total : ").append(format(totalTTC));
 		return report.toString();
 	}
+
+	private String format(double d) {
+		String doubleFormated = f.format(d);
+		return doubleFormated;
+	}
+
 }
