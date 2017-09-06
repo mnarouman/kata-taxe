@@ -38,19 +38,20 @@ public class ProductFactory extends AbstractProductFactory {
 		Class<? extends IProduct> clazz = productConfig.getClazz();
 		double prixHT = productConfig.getPrixHT();
 		String productName = productConfig.getProductName();
+		boolean imported = productConfig.isImported();
 		
-		IProduct product = DefaultProduct.builder().withName(productName).withPrixHT(prixHT).build();
+		IProduct product = DefaultProduct.builder().withName(productName).withPrixHT(prixHT).withImported(imported).build();
 		
 		if (Livre.class.equals(clazz)) {
-			product = Livre.builder().withName(productName).withPrixHT(prixHT).build();
+			product = Livre.builder().withName(productName).withPrixHT(prixHT).withImported(imported).build();
 		}
 		
 		if (Nourriture.class.equals(clazz)) {
-			product = Livre.builder().withName(productName).withPrixHT(prixHT).build();
+			product = Livre.builder().withName(productName).withPrixHT(prixHT).withImported(imported).build();
 		}
 
 		if (Medicament.class.equals(clazz)) {
-			product = Livre.builder().withName(productName).withPrixHT(prixHT).build();
+			product = Livre.builder().withName(productName).withPrixHT(prixHT).withImported(imported).build();
 		}
 
 		return product;

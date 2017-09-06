@@ -47,11 +47,6 @@ public class AbstractProduct implements Comparable<AbstractProduct>, IProduct {
 	}
 
 	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this).add("name", name).add("prixHT", prixHT).add("prixTTC", prixTTC).add("taxe", taxe).add("exemptedTaxe", isExemptedTaxe()).toString();
-	}
-
-	@Override
 	public boolean equals(final Object other) {
 		if (!(other instanceof AbstractProduct)) {
 			return false;
@@ -71,5 +66,10 @@ public class AbstractProduct implements Comparable<AbstractProduct>, IProduct {
 
 	public boolean isImported() {
 		return imported;
+	}
+
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this).add("name", name).add("prixHT", prixHT).add("prixTTC", prixTTC).add("taxe", taxe).add("imported", imported).toString();
 	}
 }

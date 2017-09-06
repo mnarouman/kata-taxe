@@ -6,14 +6,16 @@ public class ProductConfig {
 	private Class<? extends IProduct> clazz;
 	private String productName;
 	private double prixHT;
+	private boolean imported;
 
 	@Generated("SparkTools")
 	private ProductConfig(Builder builder) {
 		this.clazz = builder.clazz;
 		this.productName = builder.productName;
 		this.prixHT = builder.prixHT;
+		this.imported = builder.imported;
 	}
-
+	
 	public Class<? extends IProduct> getClazz() {
 		return clazz;
 	}
@@ -26,9 +28,12 @@ public class ProductConfig {
 		return prixHT;
 	}
 
+	public boolean isImported() {
+		return imported;
+	}
+
 	/**
 	 * Creates builder to build {@link ProductConfig}.
-	 * 
 	 * @return created builder
 	 */
 	@Generated("SparkTools")
@@ -44,6 +49,7 @@ public class ProductConfig {
 		private Class<? extends IProduct> clazz;
 		private String productName;
 		private double prixHT;
+		private boolean imported;
 
 		private Builder() {
 		}
@@ -60,6 +66,11 @@ public class ProductConfig {
 
 		public Builder withPrixHT(double prixHT) {
 			this.prixHT = prixHT;
+			return this;
+		}
+
+		public Builder withImported(boolean imported) {
+			this.imported = imported;
 			return this;
 		}
 

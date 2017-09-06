@@ -210,10 +210,10 @@ public class ReportServicesTest {
 				"Montant des taxes : 7.65" + sep +
 				"Total : 65.15";
 		// and
-		ProductConfig productConfig = ProductConfig.builder().withClazz(Livre.class).withProductName("1 boîte de chocolats importée").withPrixHT(10.00d).build();
+		ProductConfig productConfig = ProductConfig.builder().withClazz(Nourriture.class).withProductName("1 boîte de chocolats importée").withPrixHT(10.00d).withImported(true).build();
 		IProduct product1 = productFactory.factoryMethod(productConfig);
 
-		productConfig = ProductConfig.builder().withClazz(Livre.class).withProductName("1 flacon de parfum importé").withPrixHT(47.50d).build();
+		productConfig = ProductConfig.builder().withProductName("1 flacon de parfum importé").withPrixHT(47.50d).withImported(true).build();
 		IProduct product2 = productFactory.factoryMethod(productConfig);
 		
 		products.add(product1);
