@@ -12,7 +12,6 @@ public class Nourriture extends AbstractProduct {
 		this.name = builder.name;
 		this.prixHT = builder.prixHT;
 		this.prixTTC = builder.prixTTC;
-		this.taxe = builder.taxe;
 		this.imported = builder.imported;
 	}
 
@@ -38,7 +37,6 @@ public class Nourriture extends AbstractProduct {
 		private String name;
 		private double prixHT;
 		private double prixTTC;
-		private double taxe;
 		private boolean imported;
 
 		private Builder() {
@@ -59,11 +57,6 @@ public class Nourriture extends AbstractProduct {
 			return this;
 		}
 
-		public Builder withTaxe(double taxe) {
-			this.taxe = taxe;
-			return this;
-		}
-
 		public Builder withImported(boolean imported) {
 			this.imported = imported;
 			return this;
@@ -74,4 +67,8 @@ public class Nourriture extends AbstractProduct {
 		}
 	}
 
+	@Override
+	public void applyTaxe() {
+		this.prixTTC = this.prixHT;
+	}
 }

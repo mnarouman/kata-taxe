@@ -68,6 +68,7 @@ public class DefaultProduct extends AbstractProduct {
 		}
 	}
 
-	
-
+	@Override
+	public void applyTaxe() {
+	}
 }

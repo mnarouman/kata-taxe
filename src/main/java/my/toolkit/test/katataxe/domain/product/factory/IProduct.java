@@ -12,12 +12,12 @@ package my.toolkit.test.katataxe.domain.product.factory;
  * @author Dirk Ehms, <a href="http://www.patternbox.com">www.patternbox.com</a>
  * @author mnarouman
  */
-public interface IProduct {
+public interface IProduct{
 	String getName();
 
 	double getPrixHT();
 
-	double getTaxe();
+//	double getTaxe();
 
 	double getPrixTTC();
 	

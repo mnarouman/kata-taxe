@@ -11,7 +11,22 @@ public class Medicament extends AbstractProduct {
 		this.name = builder.name;
 		this.prixHT = builder.prixHT;
 		this.prixTTC = builder.prixTTC;
+		this.imported = builder.imported;
 		this.taxe = builder.taxe;
+	}
+
+	@Override
+	public boolean isExemptedTaxe() {
+		return true;
+	}
+
+	/**
+	 * Creates builder to build {@link Medicament}.
+	 * @return created builder
+	 */
+	@Generated("SparkTools")
+	public static Builder builder() {
+		return new Builder();
 	}
 
 
@@ -23,6 +38,7 @@ public class Medicament extends AbstractProduct {
 		private String name;
 		private double prixHT;
 		private double prixTTC;
+		private boolean imported;
 		private double taxe;
 
 		private Builder() {
@@ -43,6 +59,11 @@ public class Medicament extends AbstractProduct {
 			return this;
 		}
 
+		public Builder withImported(boolean imported) {
+			this.imported = imported;
+			return this;
+		}
+
 		public Builder withTaxe(double taxe) {
 			this.taxe = taxe;
 			return this;
@@ -53,9 +74,10 @@ public class Medicament extends AbstractProduct {
 		}
 	}
 
+
 	@Override
-	public boolean isExemptedTaxe() {
-		return true;
+	public void applyTaxe() {
+		this.prixTTC = this.prixHT;
 	}
 
 }

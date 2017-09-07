@@ -7,8 +7,8 @@ import java.util.Locale;
 
 import my.toolkit.test.katataxe.domain.command.Command;
 import my.toolkit.test.katataxe.domain.facture.Facture;
-import my.toolkit.test.katataxe.domain.product.factory.IProduct;
 import my.toolkit.test.katataxe.services.command.CommandServices;
+import my.toolkit.test.katataxe.services.taxe.Taxable;
 
 public class ReportServices {
 	private String sep = System.getProperty("line.separator");
@@ -33,12 +33,12 @@ public class ReportServices {
 
 		Facture facture = commandServices.createFacture(command);
 
-		List<IProduct> products = facture.getProducts();
+		List<Taxable> products = facture.getProducts();
 
 		StringBuffer report = new StringBuffer();
 		double totalTTC = facture.getPrixTTC();
 
-		for (IProduct product : products) {
+		for (Taxable product : products) {
 			double prixTTC = product.getPrixTTC();
 			String sPrixTTC = format(prixTTC);
 			

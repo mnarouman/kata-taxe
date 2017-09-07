@@ -3,11 +3,13 @@
  */
 package my.toolkit.test.katataxe.domain.product.factory;
 
+import javax.annotation.Generated;
+
 import my.toolkit.test.katataxe.domain.product.DefaultProduct;
 import my.toolkit.test.katataxe.domain.product.Livre;
 import my.toolkit.test.katataxe.domain.product.Medicament;
 import my.toolkit.test.katataxe.domain.product.Nourriture;
-import javax.annotation.Generated;
+import my.toolkit.test.katataxe.services.taxe.Taxable;
 
 /**
  * PatternBox: "ProductFactory" implementation.
@@ -34,24 +36,24 @@ public class ProductFactory extends AbstractProductFactory {
 	/** 
 	 * This method returns a new instance of a ConcreteProduct implementation.
 	 */
-	public IProduct factoryMethod(ProductConfig productConfig) {
+	public Taxable factoryMethod(ProductConfig productConfig) {
 		Class<? extends IProduct> clazz = productConfig.getClazz();
 		double prixHT = productConfig.getPrixHT();
 		String productName = productConfig.getProductName();
 		boolean imported = productConfig.isImported();
 		
-		IProduct product = DefaultProduct.builder().withName(productName).withPrixHT(prixHT).withImported(imported).build();
+		Taxable product = DefaultProduct.builder().withName(productName).withPrixHT(prixHT).withImported(imported).build();
 		
 		if (Livre.class.equals(clazz)) {
 			product = Livre.builder().withName(productName).withPrixHT(prixHT).withImported(imported).build();
 		}
 		
 		if (Nourriture.class.equals(clazz)) {
-			product = Livre.builder().withName(productName).withPrixHT(prixHT).withImported(imported).build();
+			product = Nourriture.builder().withName(productName).withPrixHT(prixHT).withImported(imported).build();
 		}
 
 		if (Medicament.class.equals(clazz)) {
-			product = Livre.builder().withName(productName).withPrixHT(prixHT).withImported(imported).build();
+			product = Medicament.builder().withName(productName).withPrixHT(prixHT).withImported(imported).build();
 		}
 
 		return product;

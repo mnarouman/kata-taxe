@@ -3,6 +3,8 @@
  */
 package my.toolkit.test.katataxe.domain.product.factory;
 
+import my.toolkit.test.katataxe.services.taxe.Taxable;
+
 /**
  * PatternBox: "Creator" implementation.
  * <ul>
@@ -18,6 +20,6 @@ public abstract class AbstractProductFactory {
 	/** 
 	 * The ProductFactory implementation have to return a ConcreteProduct.
 	 */
-	public abstract IProduct factoryMethod(ProductConfig productConfig);
+	public abstract Taxable factoryMethod(ProductConfig productConfig);
 
 }

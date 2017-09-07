@@ -8,11 +8,11 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.ComparisonChain;
 
-import my.toolkit.test.katataxe.domain.product.factory.IProduct;
+import my.toolkit.test.katataxe.services.taxe.Taxable;
 
 public class Command implements Comparable<Command> {
 	private long id;
-	private List<IProduct> products;
+	private List<Taxable> products;
 
 	@Generated("SparkTools")
 	private Command(Builder builder) {
@@ -20,7 +20,7 @@ public class Command implements Comparable<Command> {
 		this.products = builder.products;
 	}
 
-	public List<IProduct> getProducts() {
+	public List<Taxable> getProducts() {
 		return products;
 	}
 
@@ -68,7 +68,7 @@ public class Command implements Comparable<Command> {
 	@Generated("SparkTools")
 	public static final class Builder {
 		private long id;
-		private List<IProduct> products;
+		private List<Taxable> products;
 
 		private Builder() {
 		}
@@ -78,7 +78,7 @@ public class Command implements Comparable<Command> {
 			return this;
 		}
 
-		public Builder withProducts(List<IProduct> products) {
+		public Builder withProducts(List<Taxable> products) {
 			this.products = products;
 			return this;
 		}

@@ -4,13 +4,15 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.ComparisonChain;
 
-public class AbstractProduct implements Comparable<AbstractProduct>, IProduct {
+import my.toolkit.test.katataxe.services.taxe.Taxable;
+
+public abstract class AbstractProduct implements Comparable<AbstractProduct>, Taxable {
 
 	protected String name = "";
 	protected double prixHT;
 	protected double prixTTC;
-	protected double taxe;
 	protected boolean imported;
+	protected double taxe; 
 
 	public AbstractProduct() {
 		super();
@@ -27,20 +29,10 @@ public class AbstractProduct implements Comparable<AbstractProduct>, IProduct {
 	}
 
 	@Override
-	public double getTaxe() {
-		return taxe;
-	}
-
-
-	@Override
 	public double getPrixTTC() {
 		return prixTTC;
 	}
 
-	@Override
-	public int compareTo(final AbstractProduct other) {
-		return ComparisonChain.start().compare(getName(), other.getName()).compare(getPrixHT(), other.getPrixHT()).compare(getPrixTTC(), other.getPrixTTC()).compare(getTaxe(), other.getTaxe()).result();
-	}
 
 	public boolean isExemptedTaxe() {
 		return false;
@@ -69,7 +61,21 @@ public class AbstractProduct implements Comparable<AbstractProduct>, IProduct {
 	}
 
 	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this).add("name", name).add("prixHT", prixHT).add("prixTTC", prixTTC).add("taxe", taxe).add("imported", imported).toString();
+	public int compareTo(final AbstractProduct other) {
+		return ComparisonChain.start().compare(name, other.name).result();
 	}
+
+	public double getTaxe() {
+		return taxe;
+	}
+
+	public void setTaxe(double taxe) {
+		this.taxe = taxe;
+	}
+
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this).add("name", name).add("prixHT", prixHT).add("prixTTC", prixTTC).add("imported", imported).add("taxe", taxe).toString();
+	}
+
 }

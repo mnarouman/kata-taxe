@@ -2,6 +2,7 @@ package my.toolkit.test.katataxe.domain.product.factory;
 
 import javax.annotation.Generated;
 
+
 public class ProductConfig {
 	private Class<? extends IProduct> clazz;
 	private String productName;

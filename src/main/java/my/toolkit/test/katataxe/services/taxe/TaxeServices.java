@@ -3,8 +3,8 @@
  */
 package my.toolkit.test.katataxe.services.taxe;
 
-import my.toolkit.test.katataxe.domain.product.DefaultProduct;
-import my.toolkit.test.katataxe.domain.product.factory.IProduct;
+import my.toolkit.test.katataxe.services.taxe.impl.ImportedTaxe;
+import my.toolkit.test.katataxe.services.taxe.impl.Tva;
 
 /**
  * PatternBox: "Singleton" implementation.
@@ -36,40 +36,18 @@ public class TaxeServices {
 	public static synchronized TaxeServices getUniqueInstance() {
 		return sInstance;
 	}
-
-	public IProduct taxe(IProduct product) {
-		double importedTaxe=0;
+	
+	public Taxable taxe(Taxable product) {
+		if (!product.isExemptedTaxe()) {
+			product = new Tva(product);
+		}
+		
 		if (product.isImported()) {
-			importedTaxe = TAXE_5_PERCENTS;
+			product = new ImportedTaxe(product);
 		}
-		
-		double prixTTC = 0;
-		double prixHT = product.getPrixHT();
-		double taxe = 0;
-		if (product.isExemptedTaxe()) {
-			prixTTC = product.getPrixHT();
-		} else {
-			taxe = taxeProvider.roundTaxe((prixHT / 100) * TAXE_10_PERCENTS);
-			prixTTC = taxeProvider.roundPrix(prixHT + taxe);
-		}
-		
-		if (importedTaxe != 0) {
-			double importedTaxeValue = taxeProvider.roundTaxe((prixHT / 100) * importedTaxe);
-			prixTTC = taxeProvider.roundPrix(prixTTC + importedTaxeValue);
-			
-			taxe+= importedTaxeValue;
-			
-		}
-		
-		product.setPrixTTC(prixTTC);
-		
-		product = DefaultProduct.builder().withName(product.getName())
-								   .withPrixHT(prixHT)
-								   .withPrixTTC(prixTTC)
-								   .withTaxe(taxe)
-								   .build();
+	
+		product.applyTaxe();
 		
 		return product;
 	}
-
 }

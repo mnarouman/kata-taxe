@@ -72,4 +72,9 @@ public class Livre extends AbstractProduct {
 			return new Livre(this);
 		}
 	}
+
+	@Override
+	public void applyTaxe() {
+		this.prixTTC = this.prixHT;
+	}
 }

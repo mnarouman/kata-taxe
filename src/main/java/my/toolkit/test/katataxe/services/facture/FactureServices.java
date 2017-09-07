@@ -8,9 +8,7 @@ import java.util.List;
 
 import my.toolkit.test.katataxe.domain.command.Command;
 import my.toolkit.test.katataxe.domain.facture.Facture;
-import my.toolkit.test.katataxe.domain.product.DefaultProduct;
-import my.toolkit.test.katataxe.domain.product.factory.IProduct;
-import my.toolkit.test.katataxe.services.taxe.TaxeProvider;
+import my.toolkit.test.katataxe.services.taxe.Taxable;
 import my.toolkit.test.katataxe.services.taxe.TaxeServices;
 
 /**
@@ -46,18 +44,18 @@ public class FactureServices {
 	}
 
 	public Facture createFacture(Command command) {
-		List<IProduct> products = command.getProducts();
-		List<IProduct> taxedProducts = new ArrayList<IProduct>(products.size());
+		List<Taxable> products = command.getProducts();
+		List<Taxable> taxedProducts = new ArrayList<Taxable>(products.size());
 		double totalHT = 0;
 		double totalTTC = 0;
 		double totalTaxe = 0;
 
-		for (IProduct product : products) {
+		for (Taxable product : products) {
 
 			double prixHT = product.getPrixHT();
 			totalHT += prixHT;
 			
-			IProduct taxedProduct = taxeServices.taxe(product);
+			Taxable taxedProduct = taxeServices.taxe(product);
 			
 			double productTaxe = taxedProduct.getTaxe();
 			totalTaxe += productTaxe;
