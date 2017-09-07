@@ -27,13 +27,6 @@ public class ProductFactory extends AbstractProductFactory {
 	}
 
 	/** 
-	 * Default constructor
-	 */
-	public ProductFactory() {
-		super();
-	}
-
-	/** 
 	 * This method returns a new instance of a ConcreteProduct implementation.
 	 */
 	public Taxable factoryMethod(ProductConfig productConfig) {

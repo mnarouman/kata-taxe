@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import my.toolkit.test.katataxe.domain.command.Command;
 import my.toolkit.test.katataxe.domain.product.Livre;
+import my.toolkit.test.katataxe.domain.product.Medicament;
 import my.toolkit.test.katataxe.domain.product.Nourriture;
 import my.toolkit.test.katataxe.domain.product.factory.AbstractProductFactory;
 import my.toolkit.test.katataxe.domain.product.factory.ProductConfig;
@@ -218,6 +219,44 @@ public class ReportServicesTest {
 		
 		products.add(product1);
 		products.add(product2);
+
+		Command command = Command.builder().withId(1).withProducts(products).build();
+
+		// when
+		String actual = reportServices.report(command);
+
+		// then
+		assertThat(actual).isEqualTo(expected);
+	}
+
+	// C'est l'output 3
+	@Test
+	public void afficheTotalForAllProductsType() {
+		// given
+		String sProducts = "1 flacon de parfum importé : 32.19" + sep +
+				"1 flacon de parfum : 20.89"+ sep +
+				"1 boîte de pilules contre la migraine : 9.75" + sep +
+				"1 boîte de chocolats importés : 11.85" ;
+		String expected = sProducts + sep +
+				"Montant des taxes : 6.70" + sep +
+				"Total : 74.68";
+		// and
+		ProductConfig productConfig = ProductConfig.builder().withProductName("1 flacon de parfum importé").withPrixHT(27.99d).withImported(true).build();
+		Taxable product1 = productFactory.factoryMethod(productConfig);
+
+		productConfig = ProductConfig.builder().withProductName("1 flacon de parfum").withPrixHT(18.99d).build();
+		Taxable product2 = productFactory.factoryMethod(productConfig);
+
+		productConfig = ProductConfig.builder().withProductName("1 boîte de pilules contre la migraine").withClazz(Medicament.class).withPrixHT(9.75d).build();
+		Taxable product3 = productFactory.factoryMethod(productConfig);
+		
+		productConfig = ProductConfig.builder().withProductName("1 boîte de chocolats importés").withClazz(Nourriture.class).withPrixHT(11.25d).withImported(true).build();
+		Taxable product4 = productFactory.factoryMethod(productConfig);
+
+		products.add(product1);
+		products.add(product2);
+		products.add(product3);
+		products.add(product4);
 
 		Command command = Command.builder().withId(1).withProducts(products).build();
 

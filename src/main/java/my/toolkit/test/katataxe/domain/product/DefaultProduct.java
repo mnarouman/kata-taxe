@@ -9,10 +9,10 @@ public class DefaultProduct extends AbstractProduct {
 	@Generated("SparkTools")
 	private DefaultProduct(Builder builder) {
 		this.name = builder.name;
-		this.prixHT = builder.prixHT;
-		this.prixTTC = builder.prixTTC;
-		this.taxe = builder.taxe;
-		this.imported = builder.imported;
+	    this.prixHT = builder.prixHT;
+	    this.imported = builder.imported;
+		setPrixTTC(builder.prixTTC);
+		setTaxe(builder.taxe);
 	}
 
 	/**
@@ -45,16 +45,6 @@ public class DefaultProduct extends AbstractProduct {
 
 		public Builder withPrixHT(double prixHT) {
 			this.prixHT = prixHT;
-			return this;
-		}
-
-		public Builder withPrixTTC(double prixTTC) {
-			this.prixTTC = prixTTC;
-			return this;
-		}
-
-		public Builder withTaxe(double taxe) {
-			this.taxe = taxe;
 			return this;
 		}
 

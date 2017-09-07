@@ -17,9 +17,6 @@ import my.toolkit.test.katataxe.services.taxe.impl.Tva;
  * @author mnarouman
  */
 public class TaxeServices {
-	private static final int TAXE_10_PERCENTS = 10;
-	private static final int TAXE_5_PERCENTS = 5;
-	private TaxeProvider taxeProvider = TaxeProvider.getUniqueInstance();
 	/** unique instance */
 	private static final TaxeServices sInstance = new TaxeServices();
 

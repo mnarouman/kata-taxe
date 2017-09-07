@@ -17,8 +17,6 @@ public interface IProduct{
 
 	double getPrixHT();
 
-//	double getTaxe();
-
 	double getPrixTTC();
 	
 	boolean isExemptedTaxe();

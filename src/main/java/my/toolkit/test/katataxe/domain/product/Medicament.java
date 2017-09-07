@@ -54,18 +54,8 @@ public class Medicament extends AbstractProduct {
 			return this;
 		}
 
-		public Builder withPrixTTC(double prixTTC) {
-			this.prixTTC = prixTTC;
-			return this;
-		}
-
 		public Builder withImported(boolean imported) {
 			this.imported = imported;
-			return this;
-		}
-
-		public Builder withTaxe(double taxe) {
-			this.taxe = taxe;
 			return this;
 		}
 

@@ -4,13 +4,9 @@ import java.util.List;
 
 import javax.annotation.Generated;
 
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
-import com.google.common.collect.ComparisonChain;
-
 import my.toolkit.test.katataxe.services.taxe.Taxable;
 
-public class Command implements Comparable<Command> {
+public class Command {
 	private long id;
 	private List<Taxable> products;
 
@@ -28,29 +24,6 @@ public class Command implements Comparable<Command> {
 		return id;
 	}
 
-	@Override
-	public int compareTo(final Command other) {
-		return ComparisonChain.start().compare(id, other.id).result();
-	}
-
-	@Override
-	public boolean equals(final Object other) {
-		if (!(other instanceof Command)) {
-			return false;
-		}
-		Command castOther = (Command) other;
-		return Objects.equal(id, castOther.id);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hashCode(id);
-	}
-
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this).add("id", id).add("products", products).toString();
-	}
 
 	/**
 	 * Creates builder to build {@link Command}.

@@ -46,15 +46,10 @@ public class FactureServices {
 	public Facture createFacture(Command command) {
 		List<Taxable> products = command.getProducts();
 		List<Taxable> taxedProducts = new ArrayList<Taxable>(products.size());
-		double totalHT = 0;
 		double totalTTC = 0;
 		double totalTaxe = 0;
 
 		for (Taxable product : products) {
-
-			double prixHT = product.getPrixHT();
-			totalHT += prixHT;
-			
 			Taxable taxedProduct = taxeServices.taxe(product);
 			
 			double productTaxe = taxedProduct.getTaxe();
@@ -69,16 +64,11 @@ public class FactureServices {
 												.withProducts(taxedProducts)
 												.build();
 		
-		Facture facture = Facture.builder().withId(command.getId())
-										   .withPrixHT(totalHT)
-										   .withTotalTaxes(totalTaxe)
+		Facture facture = Facture.builder().withTotalTaxes(totalTaxe)
 										   .withPrixTTC(totalTTC)
 										   .withCommand(taxedCommand)
 										   .build();
 
 		return facture;
 	}
-
-	
-
 }

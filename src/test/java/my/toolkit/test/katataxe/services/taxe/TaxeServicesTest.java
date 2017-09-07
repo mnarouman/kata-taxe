@@ -78,7 +78,6 @@ public class TaxeServicesTest {
 		//given
 		Taxable product = DefaultProduct.builder().withName("1 CD musical")
 										   .withPrixHT(16.49d)
-										   .withTaxe(10)
 										   .build();
 		
 		double expectedPrixTTC = 18.14;

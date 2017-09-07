@@ -1,7 +1,6 @@
 package my.toolkit.test.katataxe.services.taxe;
 
 import my.toolkit.test.katataxe.domain.product.factory.AbstractProduct;
-import com.google.common.base.MoreObjects;
 
 public abstract class AbstractTaxable extends AbstractProduct implements Taxable {
 	protected TaxeProvider taxeProvider = TaxeProvider.getUniqueInstance();
@@ -31,10 +30,4 @@ public abstract class AbstractTaxable extends AbstractProduct implements Taxable
 	protected Taxable getProduct() {
 		return product;
 	}
-
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this).add("product", getProduct()).add("taxe", getTaxe()).toString();
-	}
-
 }

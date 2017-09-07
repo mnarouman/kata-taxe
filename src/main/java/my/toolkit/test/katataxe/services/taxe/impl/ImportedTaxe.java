@@ -23,6 +23,5 @@ public class ImportedTaxe extends AbstractTaxable{
 		
 		double currentTaxe = product.getTaxe();
 		setTaxe(currentTaxe + taxeValue);
-		
 	}
 }
