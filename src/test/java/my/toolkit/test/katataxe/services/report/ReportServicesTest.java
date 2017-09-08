@@ -22,7 +22,7 @@ public class ReportServicesTest {
 	private String sep = System.getProperty("line.separator");
 	private ReportServices reportServices;
 	private List<Taxable> products;
-	
+
 	private AbstractProductFactory productFactory;
 
 	@Before
@@ -45,10 +45,10 @@ public class ReportServicesTest {
 				"Total : 0.00";
 
 		// and
-		ProductConfig productConfig = ProductConfig.builder().withClazz(Livre.class).withProductName("").withPrixHT(0).build();
+		ProductConfig productConfig = ProductConfig.builder().productType(Livre.class).productName("").prixHT(0).build();
 		Taxable product = productFactory.factoryMethod(productConfig);
 		products.add(product);
-		Command command = Command.builder().withId(1).withProducts(products).build();
+		Command command = Command.builder().id(1).products(products).build();
 
 		// when
 		String actual = reportServices.report(command);
@@ -64,12 +64,12 @@ public class ReportServicesTest {
 		String expected = sProducts +
 				"Montant des taxes : 0.00" + sep +
 				"Total : 0.00";
-		
-		ProductConfig productConfig = ProductConfig.builder().withClazz(Livre.class).withProductName("").withPrixHT(0).build();
+
+		ProductConfig productConfig = ProductConfig.builder().productType(Livre.class).productName("").prixHT(0).build();
 		Taxable product = productFactory.factoryMethod(productConfig);
 
 		products.add((Taxable) product);
-		Command command = Command.builder().withId(1).withProducts(products).build();
+		Command command = Command.builder().id(1).products(products).build();
 
 		// when
 		String actual = reportServices.report(command);
@@ -86,11 +86,11 @@ public class ReportServicesTest {
 				"Montant des taxes : 0.10" + sep +
 				"Total : 1.10";
 		// and
-		ProductConfig productConfig = ProductConfig.builder().withProductName("").withPrixHT(1).build();
+		ProductConfig productConfig = ProductConfig.builder().productName("").prixHT(1).build();
 		Taxable product = productFactory.factoryMethod(productConfig);
 
 		products.add(product);
-		Command command = Command.builder().withId(1).withProducts(products).build();
+		Command command = Command.builder().id(1).products(products).build();
 
 		// when
 		String actual = reportServices.report(command);
@@ -107,11 +107,11 @@ public class ReportServicesTest {
 				"Montant des taxes : 1.65" + sep +
 				"Total : 18.14";
 		// and
-		ProductConfig productConfig = ProductConfig.builder().withProductName("1 CD musical").withPrixHT(16.49d).build();
+		ProductConfig productConfig = ProductConfig.builder().productName("1 CD musical").prixHT(16.49d).build();
 		Taxable product = productFactory.factoryMethod(productConfig);
 
 		products.add(product);
-		Command command = Command.builder().withId(1).withProducts(products).build();
+		Command command = Command.builder().id(1).products(products).build();
 
 		// when
 		String actual = reportServices.report(command);
@@ -129,16 +129,16 @@ public class ReportServicesTest {
 				"Montant des taxes : 3.55" + sep +
 				"Total : 39.03";
 		// and
-		ProductConfig productConfig = ProductConfig.builder().withProductName("1 CD musical").withPrixHT(16.49d).build();
+		ProductConfig productConfig = ProductConfig.builder().productName("1 CD musical").prixHT(16.49d).build();
 		Taxable product1 = productFactory.factoryMethod(productConfig);
 
-		productConfig = ProductConfig.builder().withProductName("1 flacon de parfum").withPrixHT(18.99d).build();
+		productConfig = ProductConfig.builder().productName("1 flacon de parfum").prixHT(18.99d).build();
 		Taxable product2 = productFactory.factoryMethod(productConfig);
 
 		products.add(product1);
 		products.add(product2);
 
-		Command command = Command.builder().withId(1).withProducts(products).build();
+		Command command = Command.builder().id(1).products(products).build();
 
 		// when
 		String actual = reportServices.report(command);
@@ -155,11 +155,11 @@ public class ReportServicesTest {
 				"Montant des taxes : 1.65" + sep +
 				"Total : 18.14";
 		// and
-		ProductConfig productConfig = ProductConfig.builder().withProductName("1 CD musical").withPrixHT(16.49d).build();
+		ProductConfig productConfig = ProductConfig.builder().productName("1 CD musical").prixHT(16.49d).build();
 		Taxable product = productFactory.factoryMethod(productConfig);
 
 		products.add(product);
-		Command command = Command.builder().withId(1).withProducts(products).build();
+		Command command = Command.builder().id(1).products(products).build();
 
 		// when
 		String actual = reportServices.report(command);
@@ -173,26 +173,26 @@ public class ReportServicesTest {
 	public void afficheTotalFor2ProductsWithExempted() {
 		// given
 		String sProducts = "1 livre : 12.49" + sep +
-				"1 CD musical : 16.49"+sep+
+				"1 CD musical : 16.49" + sep +
 				"1 barre de chocolat : 0.85";
 		String expected = sProducts + sep +
 				"Montant des taxes : 1.50" + sep +
 				"Total : 29.83";
 		// and
-		ProductConfig productConfig = ProductConfig.builder().withClazz(Livre.class).withProductName("1 livre").withPrixHT(12.49d).build();
+		ProductConfig productConfig = ProductConfig.builder().productType(Livre.class).productName("1 livre").prixHT(12.49d).build();
 		Taxable product1 = productFactory.factoryMethod(productConfig);
 
-		productConfig = ProductConfig.builder().withProductName("1 CD musical").withPrixHT(14.99d).build();
+		productConfig = ProductConfig.builder().productName("1 CD musical").prixHT(14.99d).build();
 		Taxable product2 = productFactory.factoryMethod(productConfig);
-		
-		productConfig = ProductConfig.builder().withClazz(Nourriture.class).withProductName("1 barre de chocolat").withPrixHT(0.85d).build();
+
+		productConfig = ProductConfig.builder().productType(Nourriture.class).productName("1 barre de chocolat").prixHT(0.85d).build();
 		Taxable product3 = productFactory.factoryMethod(productConfig);
 
 		products.add(product1);
 		products.add(product2);
 		products.add(product3);
 
-		Command command = Command.builder().withId(1).withProducts(products).build();
+		Command command = Command.builder().id(1).products(products).build();
 
 		// when
 		String actual = reportServices.report(command);
@@ -211,16 +211,16 @@ public class ReportServicesTest {
 				"Montant des taxes : 7.65" + sep +
 				"Total : 65.15";
 		// and
-		ProductConfig productConfig = ProductConfig.builder().withClazz(Nourriture.class).withProductName("1 boîte de chocolats importée").withPrixHT(10.00d).withImported(true).build();
+		ProductConfig productConfig = ProductConfig.builder().productType(Nourriture.class).productName("1 boîte de chocolats importée").prixHT(10.00d).imported(true).build();
 		Taxable product1 = productFactory.factoryMethod(productConfig);
 
-		productConfig = ProductConfig.builder().withProductName("1 flacon de parfum importé").withPrixHT(47.50d).withImported(true).build();
+		productConfig = ProductConfig.builder().productName("1 flacon de parfum importé").prixHT(47.50d).imported(true).build();
 		Taxable product2 = productFactory.factoryMethod(productConfig);
-		
+
 		products.add(product1);
 		products.add(product2);
 
-		Command command = Command.builder().withId(1).withProducts(products).build();
+		Command command = Command.builder().id(1).products(products).build();
 
 		// when
 		String actual = reportServices.report(command);
@@ -234,23 +234,23 @@ public class ReportServicesTest {
 	public void afficheTotalForAllProductsType() {
 		// given
 		String sProducts = "1 flacon de parfum importé : 32.19" + sep +
-				"1 flacon de parfum : 20.89"+ sep +
+				"1 flacon de parfum : 20.89" + sep +
 				"1 boîte de pilules contre la migraine : 9.75" + sep +
-				"1 boîte de chocolats importés : 11.85" ;
+				"1 boîte de chocolats importés : 11.85";
 		String expected = sProducts + sep +
 				"Montant des taxes : 6.70" + sep +
 				"Total : 74.68";
 		// and
-		ProductConfig productConfig = ProductConfig.builder().withProductName("1 flacon de parfum importé").withPrixHT(27.99d).withImported(true).build();
+		ProductConfig productConfig = ProductConfig.builder().productName("1 flacon de parfum importé").prixHT(27.99d).imported(true).build();
 		Taxable product1 = productFactory.factoryMethod(productConfig);
 
-		productConfig = ProductConfig.builder().withProductName("1 flacon de parfum").withPrixHT(18.99d).build();
+		productConfig = ProductConfig.builder().productName("1 flacon de parfum").prixHT(18.99d).build();
 		Taxable product2 = productFactory.factoryMethod(productConfig);
 
-		productConfig = ProductConfig.builder().withProductName("1 boîte de pilules contre la migraine").withClazz(Medicament.class).withPrixHT(9.75d).build();
+		productConfig = ProductConfig.builder().productName("1 boîte de pilules contre la migraine").productType(Medicament.class).prixHT(9.75d).build();
 		Taxable product3 = productFactory.factoryMethod(productConfig);
-		
-		productConfig = ProductConfig.builder().withProductName("1 boîte de chocolats importés").withClazz(Nourriture.class).withPrixHT(11.25d).withImported(true).build();
+
+		productConfig = ProductConfig.builder().productName("1 boîte de chocolats importés").productType(Nourriture.class).prixHT(11.25d).imported(true).build();
 		Taxable product4 = productFactory.factoryMethod(productConfig);
 
 		products.add(product1);
@@ -258,7 +258,7 @@ public class ReportServicesTest {
 		products.add(product3);
 		products.add(product4);
 
-		Command command = Command.builder().withId(1).withProducts(products).build();
+		Command command = Command.builder().id(1).products(products).build();
 
 		// when
 		String actual = reportServices.report(command);

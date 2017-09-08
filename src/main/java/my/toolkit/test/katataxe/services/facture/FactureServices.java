@@ -60,13 +60,13 @@ public class FactureServices {
 			taxedProducts.add(taxedProduct);
 		}
 
-		Command taxedCommand = Command.builder().withId(command.getId())
-												.withProducts(taxedProducts)
+		Command taxedCommand = Command.builder().id(command.getId())
+												.products(taxedProducts)
 												.build();
 		
-		Facture facture = Facture.builder().withTotalTaxes(totalTaxe)
-										   .withPrixTTC(totalTTC)
-										   .withCommand(taxedCommand)
+		Facture facture = Facture.builder().totalTaxes(totalTaxe)
+										   .prixTTC(totalTTC)
+										   .command(taxedCommand)
 										   .build();
 
 		return facture;

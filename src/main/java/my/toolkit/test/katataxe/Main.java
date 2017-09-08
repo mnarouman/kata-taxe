@@ -34,20 +34,20 @@ public class Main {
 	// C'est l'output 1
 	private static String afficheOutput1() {
 		List<Taxable> products = new ArrayList<>();
-		ProductConfig productConfig = ProductConfig.builder().withClazz(Livre.class).withProductName("1 livre").withPrixHT(12.49d).build();
+		ProductConfig productConfig = ProductConfig.builder().productType(Livre.class).productName("1 livre").prixHT(12.49d).build();
 		Taxable product1 = productFactory.factoryMethod(productConfig);
 
-		productConfig = ProductConfig.builder().withProductName("1 CD musical").withPrixHT(14.99d).build();
+		productConfig = ProductConfig.builder().productName("1 CD musical").prixHT(14.99d).build();
 		Taxable product2 = productFactory.factoryMethod(productConfig);
 		
-		productConfig = ProductConfig.builder().withClazz(Nourriture.class).withProductName("1 barre de chocolat").withPrixHT(0.85d).build();
+		productConfig = ProductConfig.builder().productType(Nourriture.class).productName("1 barre de chocolat").prixHT(0.85d).build();
 		Taxable product3 = productFactory.factoryMethod(productConfig);
 
 		products.add(product1);
 		products.add(product2);
 		products.add(product3);
 
-		Command command = Command.builder().withId(1).withProducts(products).build();
+		Command command = Command.builder().id(1).products(products).build();
 
 		return reportServices.report(command);
 	}
@@ -55,16 +55,16 @@ public class Main {
 	// C'est l'output 2
 	private static String afficheOutput2() {
 		List<Taxable> products = new ArrayList<>();
-		ProductConfig productConfig = ProductConfig.builder().withClazz(Nourriture.class).withProductName("1 boîte de chocolats importée").withPrixHT(10.00d).withImported(true).build();
+		ProductConfig productConfig = ProductConfig.builder().productType(Nourriture.class).productName("1 boîte de chocolats importée").prixHT(10.00d).imported(true).build();
 		Taxable product1 = productFactory.factoryMethod(productConfig);
 
-		productConfig = ProductConfig.builder().withProductName("1 flacon de parfum importé").withPrixHT(47.50d).withImported(true).build();
+		productConfig = ProductConfig.builder().productName("1 flacon de parfum importé").prixHT(47.50d).imported(true).build();
 		Taxable product2 = productFactory.factoryMethod(productConfig);
 		
 		products.add(product1);
 		products.add(product2);
 
-		Command command = Command.builder().withId(1).withProducts(products).build();
+		Command command = Command.builder().id(1).products(products).build();
 
 		return reportServices.report(command);
 	}
@@ -73,16 +73,16 @@ public class Main {
 	private static String afficheOutput3() {
 		List<Taxable> products = new ArrayList<>();
 		
-		ProductConfig productConfig = ProductConfig.builder().withProductName("1 flacon de parfum importé").withPrixHT(27.99d).withImported(true).build();
+		ProductConfig productConfig = ProductConfig.builder().productName("1 flacon de parfum importé").prixHT(27.99d).imported(true).build();
 		Taxable product1 = productFactory.factoryMethod(productConfig);
 
-		productConfig = ProductConfig.builder().withProductName("1 flacon de parfum").withPrixHT(18.99d).build();
+		productConfig = ProductConfig.builder().productName("1 flacon de parfum").prixHT(18.99d).build();
 		Taxable product2 = productFactory.factoryMethod(productConfig);
 
-		productConfig = ProductConfig.builder().withProductName("1 boîte de pilules contre la migraine").withClazz(Medicament.class).withPrixHT(9.75d).build();
+		productConfig = ProductConfig.builder().productName("1 boîte de pilules contre la migraine").productType(Medicament.class).prixHT(9.75d).build();
 		Taxable product3 = productFactory.factoryMethod(productConfig);
 		
-		productConfig = ProductConfig.builder().withProductName("1 boîte de chocolats importés").withClazz(Nourriture.class).withPrixHT(11.25d).withImported(true).build();
+		productConfig = ProductConfig.builder().productName("1 boîte de chocolats importés").productType(Nourriture.class).prixHT(11.25d).imported(true).build();
 		Taxable product4 = productFactory.factoryMethod(productConfig);
 
 		products.add(product1);
@@ -90,9 +90,8 @@ public class Main {
 		products.add(product3);
 		products.add(product4);
 
-		Command command = Command.builder().withId(1).withProducts(products).build();
+		Command command = Command.builder().id(1).products(products).build();
 
 		return reportServices.report(command);
 	}
-
 }

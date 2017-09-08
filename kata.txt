@@ -78,3 +78,36 @@ Total : 65.15
 Montant des taxes : 6.70
 Total : 74.68
 
+Le projet est une implémentation possible et contient l'historique GIT suivant:
+* 6bc9687 - Refactoring avec Lombok
+* a762c9c - Le test du cas 3 passe directement ! Finit
+* bb4946e - Refactoring Ok
+* fb09cb6 - Le test pour les produits importés passe
+* 6c12205 - Le test pour la taxe des produits importés plante...
+* d8c7e95 - On a refactoré les classes...
+* e98ccde - Le test pour les produits exemptés passe !
+* c629fdb - Le test pour les produits exemptés plante : normal
+* 0f6c458 - Le test de la boucle externe passe !
+* 34ed15e - La boucle interne passe, mais pas l'externe...
+* b2ac8cb - On implémente un test simple pour la taxation d'un produit...
+* 05d07ed - On implémente le test qui plante.
+* 5b26c3a - L'algo des arrondi est testé !
+* 52599bc - Le test pour le 3eme cas passe !
+* 8c89da8 - Le 3eme cas ne passe passe : normal
+* 179d065 - Le test pour le 1er cas d'arrondi passe.
+* 460032a - Le test pour le 1er cas d'arrondi plante : normal
+* 378f149 - Après le refactoring, le code compile : ok
+* 25fc5d4 - Le test passe pour 2 produits. On refactore...
+* 77da83a - La méthode pour 2 articles plante : normal !
+* 2e933c2 - Le test pour un produt passe
+* 3a8d5fb - Le test plante, On crée le produit...
+* f378d94 - Le formatage des nombres est ok. Gérons un produit
+* 4ca797d - Le formatage est ok -> refactoring
+* d55121f - La méthode pour formater 1 plante : normal !
+* 1a0657e - Passage du 1er test pour le formatage
+* e7d56ad - Initialisation du formatage des nombres
+* b0e88fa - création du ServiceReport et de sa méthode report
+* 6862d7b - Création d'une classe de test pour les rapport
+* a0a49f0 - Initialisation du projet
+
+Vous pouvez vous positionner sur chaque commit via git reset --hard <NUM_COMMIT>

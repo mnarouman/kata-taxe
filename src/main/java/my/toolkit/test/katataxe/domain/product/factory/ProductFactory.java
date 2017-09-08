@@ -30,23 +30,27 @@ public class ProductFactory extends AbstractProductFactory {
 	 * This method returns a new instance of a ConcreteProduct implementation.
 	 */
 	public Taxable factoryMethod(ProductConfig productConfig) {
-		Class<? extends IProduct> clazz = productConfig.getClazz();
+		Class<? extends IProduct> productType = productConfig.getProductType();
 		double prixHT = productConfig.getPrixHT();
 		String productName = productConfig.getProductName();
 		boolean imported = productConfig.isImported();
 		
-		Taxable product = DefaultProduct.builder().withName(productName).withPrixHT(prixHT).withImported(imported).build();
+		Taxable product = null;
 		
-		if (Livre.class.equals(clazz)) {
-			product = Livre.builder().withName(productName).withPrixHT(prixHT).withImported(imported).build();
+		if (Livre.class.equals(productType)) {
+			product = Livre.builder().name(productName).prixHT(prixHT).imported(imported).build();
 		}
 		
-		if (Nourriture.class.equals(clazz)) {
-			product = Nourriture.builder().withName(productName).withPrixHT(prixHT).withImported(imported).build();
+		if (Nourriture.class.equals(productType)) {
+			product = Nourriture.builder().name(productName).prixHT(prixHT).imported(imported).build();
 		}
 
-		if (Medicament.class.equals(clazz)) {
-			product = Medicament.builder().withName(productName).withPrixHT(prixHT).withImported(imported).build();
+		if (Medicament.class.equals(productType)) {
+			product = Medicament.builder().name(productName).prixHT(prixHT).imported(imported).build();
+		}
+		
+		if (product == null) {
+			product = DefaultProduct.builder().name(productName).prixHT(prixHT).imported(imported).build();
 		}
 
 		return product;

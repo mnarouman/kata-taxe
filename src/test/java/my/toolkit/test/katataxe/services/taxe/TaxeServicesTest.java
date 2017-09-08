@@ -76,8 +76,8 @@ public class TaxeServicesTest {
 	public void appliqueTaxe10Perc() {
 		TaxeServices taxeServices = TaxeServices.getUniqueInstance();
 		//given
-		Taxable product = DefaultProduct.builder().withName("1 CD musical")
-										   .withPrixHT(16.49d)
+		Taxable product = DefaultProduct.builder().name("1 CD musical")
+										   .prixHT(16.49d)
 										   .build();
 		
 		double expectedPrixTTC = 18.14;

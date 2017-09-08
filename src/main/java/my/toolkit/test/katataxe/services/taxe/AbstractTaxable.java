@@ -1,33 +1,19 @@
 package my.toolkit.test.katataxe.services.taxe;
 
+import lombok.Getter;
 import my.toolkit.test.katataxe.domain.product.factory.AbstractProduct;
+
 
 public abstract class AbstractTaxable extends AbstractProduct implements Taxable {
 	protected TaxeProvider taxeProvider = TaxeProvider.getUniqueInstance();
+	
+	@Getter
 	private Taxable product;
-	protected double taxe;
 
 	public AbstractTaxable(Taxable product) {
-		super();
+		super(product.getName(),product.getPrixHT(),product.isImported());
 		this.product = product;
-		this.imported = product.isImported();
-		this.name = product.getName();
-		this.prixHT = product.getPrixHT();
-		this.prixTTC = product.getPrixTTC();
-		this.taxe = product.getTaxe();
-	}
-
-	@Override
-	public double getTaxe() {
-		return taxe;
-	}
-
-	@Override
-	public void setTaxe(double taxe) {
-		this.taxe = taxe;
-	}
-
-	protected Taxable getProduct() {
-		return product;
+		setPrixTTC(product.getPrixTTC());
+		setTaxe(product.getTaxe());
 	}
 }
