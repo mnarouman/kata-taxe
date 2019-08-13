@@ -79,7 +79,7 @@ Montant des taxes : 6.70
 Total : 74.68
 
 Le projet est une implémentation possible et contient l'historique GIT suivant:
-* 6bc9687 - Refactoring avec Lombok
+* 807dd83 - Refactoring avec Lombok
 * a762c9c - Le test du cas 3 passe directement ! Finit
 * bb4946e - Refactoring Ok
 * fb09cb6 - Le test pour les produits importés passe
