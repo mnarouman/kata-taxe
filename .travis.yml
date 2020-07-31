@@ -1,6 +1,6 @@
 language: java 
 jdk: 
-    - oraclejdk8 
+    - openjdk8 
 env: 
     - MVN_VERSION=3.3.9 
 cache: 
